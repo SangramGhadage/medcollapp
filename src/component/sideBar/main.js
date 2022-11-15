@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, CssBaseline, Drawer, Divider, MenuItem, Menu, ListItem, ListItemIcon, ListItemText, List, IconButton, Avatar } from "@material-ui/core";
+import { AppBar, Toolbar, CssBaseline, Drawer, Divider, Menu, ListItem, ListItemIcon, ListItemText, List, IconButton, Avatar } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import CloseIcon from '@mui/icons-material/Close';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
-import { hasChildren } from "./utils";
+import Navbar from './index'
 
-const drawerWidth = 240;
-
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -140,7 +140,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
 export default function SideBar() {
     const classes = useStyles();
     const theme = useTheme();
@@ -168,82 +167,6 @@ export default function SideBar() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
-    const menuItems = [
-        {
-            text: 'Dashboard',
-            icon: HomeIcon,
-            onClick: () =>  navigate("/"),
-            items:[]
-        },
-        {
-            text: 'Masters',
-            icon: DashboardIcon,
-            onClick: () => navigate("/#"),
-            items: [
-                {
-                    text: 'Diseases',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Hospitals',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Countries',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Tourism Attraction',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-            ]
-        },
-        {
-            text: "Vendors",
-            icon: PeopleOutlineIcon,
-            onClick: () => navigate('/#'),
-            items: [
-                {
-                    text: 'Medical Tourism Company',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Travel Agency',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Insurance Company',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Hotel/Resort',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-                {
-                    text: 'Air Ambulance/Taxis',
-                    icon: HomeIcon,
-                    onClick: () => console.log("clicked"),
-                },
-            ]
-        },
-        {
-            text: "Reports",
-            icon: AssignmentIcon,
-            onClick: () => navigate("/#"),
-            items:[]
-        },
-
-    ];
-    
 
     return (
         <div className={classes.root}>
@@ -319,8 +242,8 @@ export default function SideBar() {
                                 open={anchorElProfile}
                                 onClick={() => setAnchorElProfile(false)}
                             >
-                                <MenuItem>Profile</MenuItem>
-                                <MenuItem>Logout</MenuItem>
+                                {/* <MenuItem>Profile</MenuItem>
+                                <MenuItem>Logout</MenuItem> */}
                             </Menu>
                         </div>
                     )}
@@ -348,20 +271,20 @@ export default function SideBar() {
             >
                 <div className={classes.toolbar} style={{ color: '#fff' }}>
                     <IconButton onClick={handleDrawerClose} style={{ color: '#fff' }}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <CloseIcon />}
                     </IconButton>
                 </div>
                 <Divider />
-                <List onMouseOver={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
-                    {menuItems.map(({ text, icon: Icon, onClick, items }, index) => (
+                <List onMouseOver={handleDrawerOpen}>
+                    {/* {menuItems.map(({ text, icon: Icon, onClick, items }, index) => (
                         <ListItem button key={text} onClick={onClick}>
                             <ListItemIcon style={{ color: '#fff' }}>
                                 <Icon />
-                            </ListItemIcon>
+                            </ListItemIcon>+
                             <ListItemText primary={text} />
-                            <ListItemText primary={items} />
                         </ListItem>
-                    ))}
+                    ))} */}
+                    <Navbar/>
                 </List>
 
             </Drawer>
