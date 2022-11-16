@@ -4,7 +4,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SideBar from './component/sideBar/main'
-import AppBar from './component/sideBar/index'
+import Login from './component/adminLogin/index'
 
 function App() {
   return (
@@ -12,7 +12,8 @@ function App() {
       <div>
         <Router>
           <Routes>
-          <Route exact path='/' element={<SideBar/>} />
+          <Route exact path='/' element={<Login/>} />
+          <Route exact path='/SideBar' element={<SideBar/>} />
           </Routes>
         </Router>
       </div>
