@@ -2,17 +2,30 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Button } from "@material-ui/core";
 import { useNavigate } from 'react-router-dom';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 export default function Login() {
     const classes = useStyles();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState();
+    const [showPassword, setshowPassword] = useState(false);
+
 
     const handleLogin = () => {
         // alert("hello")
         navigate('/sideBar')
     }
+    const handleClickShowPassword = () => {
+        setshowPassword(!showPassword);
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
     return (
         <div className={classes.root}>
             <div className={classes.loginBox}>
@@ -22,10 +35,22 @@ export default function Login() {
                             <h1 style={{ fontSize: '1.5rem' }}>Login Here</h1>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type='email' label="Email" variant="standard" size="small" required/>
+                            <TextField className={classes.textField} id="standard-basic" type='email' label="Email" variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type='password' label="Password" variant="standard" size="small" required />
+                            <TextField className={classes.textField} id="standard-basic" type='password' label="Password" variant="standard" size="small" required InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }} />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Button type='submit' className={classes.btn} onClick={handleLogin}>Submit</Button>
