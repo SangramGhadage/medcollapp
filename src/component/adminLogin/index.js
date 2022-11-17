@@ -28,6 +28,7 @@ export default function Login() {
       };
     return (
         <div className={classes.root}>
+            <img src="companyLogo.jpeg" alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
             <div className={classes.loginBox}>
                 <form>
                     <Grid container>
@@ -38,7 +39,7 @@ export default function Login() {
                             <TextField className={classes.textField} id="standard-basic" type='email' label="Email" variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type='password' label="Password" variant="standard" size="small" required InputProps={{
+                            <TextField className={classes.textField} id="standard-basic" type={showPassword ? 'text' : 'password'} label="Password" variant="standard" size="small" required InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton

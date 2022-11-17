@@ -208,7 +208,8 @@ export default function SideBar() {
                     >
                     </Menu>
                     <div className={classes.appName}>
-                        <h1 style={{ fontSize: '1.5rem' }}>medcollapp</h1>
+                        {/* <h1 style={{ fontSize: '1.5rem' }}>medcollapp</h1> */}
+                        <img src="companyLogo.jpeg" alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
                     </div>
                     <div className={classes.drname}>
 
