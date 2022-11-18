@@ -28,7 +28,7 @@ export default function Login() {
       };
     return (
         <div className={classes.root}>
-            <img src="companyLogo.jpeg" alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
+            <img src="companyLogo.jpeg" alt="logo" height='10px' style={{ flex: 1 }} />
             <div className={classes.loginBox}>
                 <form>
                     <Grid container>
@@ -71,7 +71,9 @@ const useStyles = makeStyles(() => ({
         width: '100vw',
         minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent:
+         'center',
         alignItems: 'center'
     },
     loginBox: {
