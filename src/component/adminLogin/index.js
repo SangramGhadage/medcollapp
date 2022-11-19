@@ -11,21 +11,30 @@ export default function Login() {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setshowPassword] = useState(false);
 
 
     const handleLogin = () => {
-        // alert("hello")
-        navigate('/sideBar')
+        if (email == '') {
+            alert('Enter Email Address')
+        } else if (password == '') {
+            alert('Enter Password')
+        }
+        else {
+            navigate('/sideBar')
+
+        }
+        console.log(email)
     }
     const handleClickShowPassword = () => {
         setshowPassword(!showPassword);
-      };
-    
-      const handleMouseDownPassword = (event) => {
+    };
+
+    const handleMouseDownPassword = (event) => {
         event.preventDefault();
-      };
+    };
     return (
         <div className={classes.root}>
             <img src="companyLogo.jpeg" alt="logo" height='10px' style={{ flex: 1 }} />
@@ -36,10 +45,10 @@ export default function Login() {
                             <h1 style={{ fontSize: '1.5rem' }}>Login Here</h1>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type='email' label="Email" variant="standard" size="small" required />
+                            <TextField className={classes.textField} id="standard-basic" type='email' label="Email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type={showPassword ? 'text' : 'password'} label="Password" variant="standard" size="small" required InputProps={{
+                            <TextField className={classes.textField} id="standard-basic" type={showPassword ? 'text' : 'password'} label="Password" value={password} onChange={(e) => setPassword(e.target.value)} variant="standard" size="small" required InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
@@ -73,7 +82,7 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent:
-         'center',
+            'center',
         alignItems: 'center'
     },
     loginBox: {
