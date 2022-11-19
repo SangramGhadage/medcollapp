@@ -6,6 +6,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import axios from 'axios';
+
+const loginapi = 'https://api.medcollapp.com/api/login';
 
 export default function Login() {
     const classes = useStyles();
@@ -16,17 +19,31 @@ export default function Login() {
     const [showPassword, setshowPassword] = useState(false);
 
 
-    const handleLogin = () => {
-        if (email == '') {
-            alert('Enter Email Address')
-        } else if (password == '') {
-            alert('Enter Password')
-        }
-        else {
-            navigate('/sideBar')
+    const handleLogin = async () => {
+        // if (email == '') {
+        //     alert('Enter Email Address')
+        // } else if (password == '') {
+        //     alert('Enter Password')
+        // }
+        // else {
+        //     navigate('/sideBar')
 
+        // }
+        // console.log(email)
+        try {
+            await axios.post(loginapi, { email: email, password: password }).then(Json => {
+                window.localStorage.setItem("userdata", JSON.stringify(Json?.data));
+                let responseData = Json.data;
+                if (responseData == '201') {
+                    navigate('/sideBar');
+                    console.log("success")
+                }
+
+            });
+        } catch (error) {
+            console.log(error.response.data.message);
+            alert("Password/Email is Invalid")
         }
-        console.log(email)
     }
     const handleClickShowPassword = () => {
         setshowPassword(!showPassword);
