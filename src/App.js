@@ -7,6 +7,8 @@ import SideBar from './component/sideBar/main'
 import Login from './component/adminLogin/index'
 
 function App() {
+  const user = localStorage.getItem("user")
+
   return (
     <div>
       <div>

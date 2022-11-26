@@ -9,6 +9,22 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import axios from 'axios';
 
 const loginapi = 'https://api.medcollapp.com/api/login';
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+const loginUser = async (payload) => {
+    const url = "https://api.medcollapp.com/api/login";
+    return fetch(url, {
+        crossDomain: true,
+        credentials: 'same-origin',
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": 'application/json',
+            "Access-Control-Allow-Origin":'*',
+        },
+        body: JSON.stringify(payload),
+    }).then((response) => response.json());
+};
 
 export default function Login() {
     const classes = useStyles();
@@ -18,33 +34,45 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [showPassword, setshowPassword] = useState(false);
 
-
-    const handleLogin = async () => {
-        // if (email == '') {
-        //     alert('Enter Email Address')
-        // } else if (password == '') {
-        //     alert('Enter Password')
-        // }
-        // else {
-        //     navigate('/sideBar')
-
-        // }
-        // console.log(email)
-        try {
-            await axios.post(loginapi, { email: email, password: password }).then(Json => {
-                window.localStorage.setItem("userdata", JSON.stringify(Json?.data));
-                let responseData = Json.data;
-                if (responseData == '201') {
-                    navigate('/sideBar');
-                    console.log("success")
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await fetch('https://api.medcollapp.com/api/login',
+            {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": 'application/json',
+                    "Access-Control-Allow-Origin":'*'
+                },
+                body: JSON.stringify({ email, password })
+            }
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.message === "Login Successfully"){
+                    alert(data.message)
+                    localStorage.setItem("user", JSON.stringify(data.data.user))
+                    localStorage.setItem("token", data.data.token)
+                    window.location.reload()
+                }else{
+                    alert(data.message)
                 }
-
-            });
-        } catch (error) {
-            console.log(error.response.data.message);
-            alert("Password/Email is Invalid")
-        }
+            })
     }
+
+    
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const payload = {
+    //         email: email,
+    //         password: password,
+    //     };
+    //     const res = await loginUser(payload);
+    //     console.log({ payload, res });
+    // };
+
+
     const handleClickShowPassword = () => {
         setshowPassword(!showPassword);
     };
@@ -52,20 +80,23 @@ export default function Login() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    // let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     return (
+
         <div className={classes.root}>
             <img src="companyLogo.jpeg" alt="logo" height='10px' style={{ flex: 1 }} />
             <div className={classes.loginBox}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
                             <h1 style={{ fontSize: '1.5rem' }}>Login Here</h1>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type='email' label="Email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
+                            {/* <input type="hidden" name="_token" value={token}></input> */}
+                            <TextField className={classes.textField} id="email" type='email' label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="standard-basic" type={showPassword ? 'text' : 'password'} label="Password" value={password} onChange={(e) => setPassword(e.target.value)} variant="standard" size="small" required InputProps={{
+                            <TextField className={classes.textField} id="password" type={showPassword ? 'text' : 'password'} label="Password" value={password} name="password" onChange={(e) => setPassword(e.target.value)} variant="standard" size="small" required InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
@@ -80,7 +111,7 @@ export default function Login() {
                             }} />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Button type='submit' className={classes.btn} onClick={handleLogin}>Submit</Button>
+                            <Button type='submit' className={classes.btn}>Submit</Button>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <small style={{ color: '#000000', fontWeight: '600', fontSize: '0.8rem' }}>Forgot Password</small>
