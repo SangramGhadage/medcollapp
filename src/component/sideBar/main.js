@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, CssBaseline, Drawer, Divider, Menu, ListItem, ListItemIcon, ListItemText, List, IconButton, Avatar } from "@material-ui/core";
+import { AppBar, Toolbar, CssBaseline, Drawer, Divider, Menu, MenuItem, ListItem, ListItemIcon, ListItemText, List, IconButton, Avatar } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -167,6 +167,11 @@ export default function SideBar() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const handleLogOut = () => {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("user");
+        navigate('/')
+    }
 
     return (
         <div className={classes.root}>
@@ -243,8 +248,8 @@ export default function SideBar() {
                                 open={anchorElProfile}
                                 onClick={() => setAnchorElProfile(false)}
                             >
-                                {/* <MenuItem>Profile</MenuItem>
-                                <MenuItem>Logout</MenuItem> */}
+                                <MenuItem>Profile</MenuItem>
+                                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                             </Menu>
                         </div>
                     )}

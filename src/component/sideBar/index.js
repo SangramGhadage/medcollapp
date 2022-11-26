@@ -11,14 +11,14 @@ import { menu } from "./menu";
 import { hasChildren } from "./utils";
 
 export default function Navbar() {
+
   return menu.map((item, key) => <MenuItem key={key} item={item} />);
 }
-
+const user = window.localStorage.getItem("user")
 const MenuItem = ({ item }) => {
   const Component = hasChildren(item) ? MultiLevel : SingleLevel;
   return <Component item={item} />;
 };
-
 const SingleLevel = ({ item }) => {
   return (
     <ListItem button>
