@@ -10,12 +10,13 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 
 
-const navigate = useNavigate();
+// const navigate = useNavigate();
 export const menu = [
   {
     icon: <DashboardIcon />,
     title: "Dashboard",
-    items: []
+    items: [],
+    path: '/'
   },
   {
     icon: <AddchartIcon/>,
@@ -24,23 +25,20 @@ export const menu = [
       {
         title: "- Diseases",
         items: [ ],
-        onClick: () => navigate("/dashboard"),
+        path: '/'
       },
       {
         title: "- Hospitals",
         items: [],
-        onClick: () => navigate("/dashboard"),
-      },
+        path: '/'      },
       {
         title: "- Countries",
         items: [],
-        onClick: () => navigate("/dashboard"),
-      },
+        path: '/Country'      },
       {
         title: "- Tourism Attraction",
         items: [],
-        onClick: () => navigate("/dashboard"),
-      },
+        path: '/'      },
     ]
   },
   {
@@ -50,28 +48,33 @@ export const menu = [
       {
         title: "- Medical Tourism Company",
         items: [ ],
+        path: '/'
       },
       {
         title: "- Travel Agency",
-        items: [
-        ]
+        items: [ ],
+        path: '/'
       },
       {
         title: "- Insurance Company",
-        items: []
+        items: [],
+        path: '/'
       },
       {
         title: "- Hotel Resort",
-        items: []
+        items: [],
+        path: '/'
       },
       {
         title: "- Air Ambulance/Taxis",
-        items: []
+        items: [],
+        path: '/'
       },
     ]
   },
   {
     icon: <ArticleIcon />,
-    title: "Reports"
+    title: "Reports",
+    path: '/'
   },
 ];

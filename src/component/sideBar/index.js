@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useNavigate } from 'react-router-dom';
 
 import { menu } from "./menu";
 import { hasChildren } from "./utils";
@@ -20,8 +21,13 @@ const MenuItem = ({ item }) => {
   return <Component item={item} />;
 };
 const SingleLevel = ({ item }) => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = () => {
+    navigate(item.path)
+  }
   return (
-    <ListItem button>
+    <ListItem button onClick={handleMenuClick}>
       <ListItemIcon style={{ color: '#ffffff' }}>{item.icon}</ListItemIcon>
       <ListItemText primary={item.title} />
     </ListItem>
