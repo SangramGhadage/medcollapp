@@ -22,7 +22,7 @@ const MenuItem = ({ item }) => {
 const SingleLevel = ({ item }) => {
   return (
     <ListItem button>
-      <ListItemIcon style={{color: '#ffffff'}}>{item.icon}</ListItemIcon>
+      <ListItemIcon style={{ color: '#ffffff' }}>{item.icon}</ListItemIcon>
       <ListItemText primary={item.title} />
     </ListItem>
   );
@@ -39,7 +39,7 @@ const MultiLevel = ({ item }) => {
   return (
     <React.Fragment>
       <ListItem button onClick={handleClick}>
-        <ListItemIcon style={{color: '#ffffff'}}>{item.icon}</ListItemIcon>
+        <ListItemIcon style={{ color: '#ffffff' }}>{item.icon}</ListItemIcon>
         <ListItemText primary={item.title} />
         {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItem>

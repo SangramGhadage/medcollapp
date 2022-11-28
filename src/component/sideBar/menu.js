@@ -7,7 +7,10 @@ import ArticleIcon from '@mui/icons-material/Article';
 import  ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
+
+const navigate = useNavigate();
 export const menu = [
   {
     icon: <DashboardIcon />,
@@ -20,20 +23,23 @@ export const menu = [
     items: [
       {
         title: "- Diseases",
-        items: [ ]
+        items: [ ],
+        onClick: () => navigate("/dashboard"),
       },
       {
         title: "- Hospitals",
-        items: [
-        ]
+        items: [],
+        onClick: () => navigate("/dashboard"),
       },
       {
         title: "- Countries",
-        items: []
+        items: [],
+        onClick: () => navigate("/dashboard"),
       },
       {
         title: "- Tourism Attraction",
-        items: []
+        items: [],
+        onClick: () => navigate("/dashboard"),
       },
     ]
   },
@@ -43,7 +49,7 @@ export const menu = [
     items: [
       {
         title: "- Medical Tourism Company",
-        items: [ ]
+        items: [ ],
       },
       {
         title: "- Travel Agency",
