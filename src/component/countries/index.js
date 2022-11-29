@@ -47,7 +47,7 @@ export default function Country() {
     const [isSubmit, setIsSubmit] = useState(false);
 
     const navigate = useNavigate();
-    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcon: "", photos: [], bannerImage: "", tags: "", currencyName: "" }
+    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcon: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
@@ -59,31 +59,32 @@ export default function Country() {
     const handleSubmit = async (object) => {
         var token = window.localStorage.getItem("token");
         object = {
-            banner_image: initialValues.bannerImage,
-            country_code: initialValues.countryCode,
-            currency_code: initialValues.currencyCode,
-            currency_name: initialValues.currencyName,
-            currency_symbol: initialValues.currencySymbol,
-            language_code: initialValues.languageCode,
-            name: initialValues.countryName,
-            photos: initialValues.photos,
-            tags: initialValues.tags,
-            vactor_icon: initialValues.vectorIcon 
+            banner_image: formValues.bannerImage,
+            country_code: formValues.countryCode,
+            currency_code: formValues.currencyCode,
+            currency_name: formValues.currencyName,
+            currency_symbol: formValues.currencySymbol,
+            language_code: formValues.languageCode,
+            name: formValues.countryName,
+            photos: formValues.photos,
+            tags: formValues.tags,
+            vactor_icon: formValues.vectorIcon
 
         }
         try {
-            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add',object,
-             { 
-                 headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }})
+            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', object,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
             return JSON.stringify(addcountry?.data);
         }
         catch (error) {
             console.log(error.response.data.message);
         }
-        console.log(formValues);
+        console.log(formValues.countryCode);
     };
 
     //Api call to show all countries in table
@@ -139,7 +140,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.vectorIcon} name="vectorIcon" className={classes.textField} id="outlined-basic" type='text' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField value={formValues.vectorIcon} name="vectorIcon" className={classes.textField} id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -155,7 +156,7 @@ export default function Country() {
                                 <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='text' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
