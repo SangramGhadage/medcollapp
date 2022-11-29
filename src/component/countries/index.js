@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, TextField } from "@material-ui/core";
+import { Grid, Typography, TextField, Button } from "@material-ui/core";
 import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 
@@ -14,17 +14,29 @@ var columns = [
     {
         field: 'name',
         headerName: 'Country',
-        width: 140,
+        width: 180,
         editable: true,
     },
-   
+
+    {
+        field: 'country_code',
+        headerName: 'Country Code',
+        width: 180,
+        editable: true,
+    },
     {
         field: 'currency_code',
         headerName: 'Currency Code',
         width: 180,
         editable: true,
     },
- 
+    {
+        field: 'currency_name',
+        headerName: 'Currency Name',
+        width: 180,
+        editable: true,
+    },
+
 ];
 
 export default function Country() {
@@ -32,26 +44,69 @@ export default function Country() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [allCountries, setAllCountries] = useState([]);
+    const [isSubmit, setIsSubmit] = useState(false);
 
     const navigate = useNavigate();
-const countries = async () => {
-    var token = window.localStorage.getItem("token");
-    try {
-        const response = await axios.get('https://api.medcollapp.com/api/countries', 
-        {headers: {
-            "Content-Type": "application/json",
-            "Authorization" : `Bearer ${token}`
-        }},);
-        setAllCountries(response?.data?.data)
-        console.log(allCountries);
+    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcon: "", photos: [], bannerImage: "", tags: "", currencyName: "" }
+    const [formValues, setFormValues] = useState(initialValues);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
     }
-    catch (error) {
-        return (error.response.data.message)
+
+    // submit fuctionality to add country
+    const handleSubmit = async (object) => {
+        var token = window.localStorage.getItem("token");
+        object = {
+            banner_image: initialValues.bannerImage,
+            country_code: initialValues.countryCode,
+            currency_code: initialValues.currencyCode,
+            currency_name: initialValues.currencyName,
+            currency_symbol: initialValues.currencySymbol,
+            language_code: initialValues.languageCode,
+            name: initialValues.countryName,
+            photos: initialValues.photos,
+            tags: initialValues.tags,
+            vactor_icon: initialValues.vectorIcon 
+
+        }
+        try {
+            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add',object,
+             { 
+                 headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }})
+            return JSON.stringify(addcountry?.data);
+        }
+        catch (error) {
+            console.log(error.response.data.message);
+        }
+        console.log(formValues);
+    };
+
+    //Api call to show all countries in table
+    const countries = async () => {
+        var token = window.localStorage.getItem("token");
+        try {
+            const response = await axios.get('https://api.medcollapp.com/api/countries',
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+            setAllCountries(response?.data?.data)
+        }
+        catch (error) {
+            return (error.response.data.message)
+        }
     }
-}
-useEffect(() => {
-    countries();
-}, [])
+    console.log(allCountries);
+    useEffect(() => {
+        countries();
+    }, [])
 
     return (
         <>
@@ -81,53 +136,57 @@ useEffect(() => {
                     <Grid container direction='row'>
                         <Grid item xs={2}>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" />
+                                <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Vactor icon" variant="outlined" size="small" />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" />
-                            </div>
-                            <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Photos" variant="outlined" size="small" />
+                                <TextField value={formValues.vectorIcon} name="vectorIcon" className={classes.textField} id="outlined-basic" type='text' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" />
+                                <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Banner image" variant="outlined" size="small" />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Currency Code" variant="outlined" size="small" />
-                            </div>
-                            <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" />
+                                <TextField value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" />
+                                <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField className={classes.textField} id="outlined-basic" type='text' label="name" variant="outlined" size="small" />
+                                <TextField value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='text' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <div>
+                                <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="Currency Code" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
+                            <div>
+                                <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <div>
+                                <TextField value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
+                            <div>
+                                <TextField value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                     </Grid>
+                    <Grid item xs={2}>
+                        <Button onClick={() => handleSubmit(formValues)}>Submit</Button>
+                    </Grid>
                     <Grid item xs={12} >
                         <DataGrid
-                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 600, color: '#2C7FB2', marginTop: 20, marginRight: 20 }}
+                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', marginTop: 20, marginRight: 20 }}
                             rows={allCountries}
-                            rowHeight={30}
+                            rowHeight={40}
                             columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
                             columnWidth={5}
-                            // pageSize={norecords}
                         />
                     </Grid>
 
@@ -137,6 +196,7 @@ useEffect(() => {
         </>
     );
 }
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,11 +208,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
-        margin: '70px 1px 20px 25px'
-        // marginTop: 70,
-        // marginLeft: 25,
-        // marginRight: 1,
-        // marginBottom: 20
+        margin: '70px 0 20px 25px'
     },
     gridShift: {
         marginLeft: drawerWidth,
@@ -168,7 +224,6 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 400,
         fontSize: 11,
         textAlign: 'center',
-        width: '80%',
-        // height: 30,
+        width: '90%',
     },
 }));
