@@ -44,18 +44,20 @@ export default function Country() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [allCountries, setAllCountries] = useState([]);
-    const [isSubmit, setIsSubmit] = useState(false);
+    const [vectorIcone, setVectorIcon] = useState('')
 
     const navigate = useNavigate();
-    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcon: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
+    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcone: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target ;
         setFormValues({ ...formValues, [name]: value });
+        const file = e.target.files;
+        setVectorIcon(file)
     }
 
-    // submit fuctionality to add country
+    // fuctionality on Submit button to add country
     const handleSubmit = async (object) => {
         var token = window.localStorage.getItem("token");
         object = {
@@ -68,7 +70,7 @@ export default function Country() {
             name: formValues.countryName,
             photos: formValues.photos,
             tags: formValues.tags,
-            vactor_icon: formValues.vectorIcon
+            vactor_icon: vectorIcone
 
         }
         try {
@@ -84,7 +86,7 @@ export default function Country() {
         catch (error) {
             console.log(error.response.data.message);
         }
-        console.log(formValues.countryCode);
+        console.log(vectorIcone);
     };
 
     //Api call to show all countries in table
@@ -108,6 +110,10 @@ export default function Country() {
     useEffect(() => {
         countries();
     }, [])
+    const handleCellClick =  (row) => {
+        alert("you selected a row")
+        console.log(row)
+    }
 
     return (
         <>
@@ -125,8 +131,6 @@ export default function Country() {
                                 fontFamily: 'Poppins',
                                 fontStyle: 'normal',
                                 fontWeight: 500,
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
                                 textOverflow: 'ellipsis',
                                 color: '#000000',
 
@@ -139,8 +143,8 @@ export default function Country() {
                             <div>
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
-                            <div>
-                                <TextField value={formValues.vectorIcon} name="vectorIcon" className={classes.textField} id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
+                            <div style={{ marginTop: '10px' }}>
+                                <TextField  className={classes.textField} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -148,7 +152,7 @@ export default function Country() {
                                 <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -156,7 +160,7 @@ export default function Country() {
                                 <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -164,7 +168,7 @@ export default function Country() {
                                 <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="Currency Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -172,12 +176,12 @@ export default function Country() {
                                 <TextField value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
                     </Grid>
                     <Grid item xs={2}>
-                        <Button onClick={() => handleSubmit(formValues)}>Submit</Button>
+                        <Button className={classes.btn} onClick={() => handleSubmit(formValues)}>Submit</Button>
                     </Grid>
                     <Grid item xs={12} >
                         <DataGrid
@@ -188,6 +192,9 @@ export default function Country() {
                             pageSize={5}
                             rowsPerPageOptions={[5]}
                             columnWidth={5}
+                            onRowClick={(newSelection) => {
+                                handleCellClick(newSelection.row);
+                            }}
                         />
                     </Grid>
 
@@ -227,4 +234,11 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         width: '90%',
     },
+    btn: {
+        color: "#ffffff !important",
+        backgroundColor: '#407BFF !important',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        borderRadius: 9,
+    }
 }));
