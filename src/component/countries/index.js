@@ -7,6 +7,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 
 import Navbar from '../sideBar/main'
+import EditCountry from './editCountry'
 
 const drawerWidth = 260;
 
@@ -44,6 +45,8 @@ export default function Country() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [allCountries, setAllCountries] = useState([]);
+    const [openeditmodal, setOpenEditmodal] = React.useState(false);
+    const [country, setCountry] = useState('');
     const [vectorIcone, setVectorIcon] = useState('')
 
     const navigate = useNavigate();
@@ -51,16 +54,16 @@ export default function Country() {
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
-        const { name, value } = e.target ;
+        const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
         const file = e.target.files;
         setVectorIcon(file)
     }
 
     // fuctionality on Submit button to add country
-    const handleSubmit = async (object) => {
+    const handleSubmit = async () => {
         var token = window.localStorage.getItem("token");
-        object = {
+        const object = {
             banner_image: formValues.bannerImage,
             country_code: formValues.countryCode,
             currency_code: formValues.currencyCode,
@@ -106,13 +109,29 @@ export default function Country() {
             return (error.response.data.message)
         }
     }
-    console.log(allCountries);
     useEffect(() => {
         countries();
     }, [])
-    const handleCellClick =  (row) => {
-        alert("you selected a row")
-        console.log(row)
+    
+    //API to get country by id to edit
+    const handleCellClick = async (id) => {
+        var token = window.localStorage.getItem("token");
+        console.log(token)
+        // const getCountryById = await axios.post('https://api.medcollapp.com/api/country/update/'+ id, {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         // "Authorization": `Bearer ${token}`,
+        //         "Authorization": 'Bearer '+token,
+        //     }
+        // });
+        axios.post('https://api.medcollapp.com/api/country/update/11', { headers: { "Authorization": `Bearer ${token}` } })
+            .then(res => {
+                console.log(res.data);
+                setCountry(res.data);
+            }).catch((error) => {
+                    console.log(error)
+                });
+        setOpenEditmodal(true)
     }
 
     return (
@@ -144,7 +163,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div style={{ marginTop: '10px' }}>
-                                <TextField  className={classes.textField} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
+                                <TextField className={classes.textField} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -197,6 +216,7 @@ export default function Country() {
                             }}
                         />
                     </Grid>
+                    {openeditmodal ? <EditCountry show={openeditmodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
 
                 </Grid> {/* main grid */}
 
