@@ -5,40 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { Grid, Typography, TextField, Button } from "@material-ui/core";
 import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import Navbar from '../sideBar/main'
 import EditCountry from './editCountry'
+import DeleteCountry from './deleteCountry'
 
 const drawerWidth = 260;
 
-var columns = [
-    {
-        field: 'name',
-        headerName: 'Country',
-        width: 180,
-        editable: true,
-    },
 
-    {
-        field: 'country_code',
-        headerName: 'Country Code',
-        width: 180,
-        editable: true,
-    },
-    {
-        field: 'currency_code',
-        headerName: 'Currency Code',
-        width: 180,
-        editable: true,
-    },
-    {
-        field: 'currency_name',
-        headerName: 'Currency Name',
-        width: 180,
-        editable: true,
-    },
-
-];
 
 export default function Country() {
     const classes = useStyles();
@@ -46,6 +22,7 @@ export default function Country() {
     const [open, setOpen] = React.useState(false);
     const [allCountries, setAllCountries] = useState([]);
     const [openeditmodal, setOpenEditmodal] = React.useState(false);
+    const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
     const [country, setCountry] = useState('');
     const [vectorIcone, setVectorIcon] = useState('')
 
@@ -59,6 +36,66 @@ export default function Country() {
         const file = e.target.files;
         setVectorIcon(file)
     }
+    const renderDetailsButton = (params) => {
+        return (
+            <>
+                <Button
+                    size="small"
+                    style={{ marginLeft: 10, }}
+                    onClick={() => {
+                        setOpenDeletemodal(true)
+                    }}
+                >
+                    <DeleteIcon style={{ color: 'red' }} />
+                </Button>
+                <Button
+                    size="small"
+                    style={{ marginLeft: 10 }}
+                // onClick={() => {
+                //     parseName(params.row.id)
+                // }}
+                >
+                    <BorderColorIcon />
+                </Button>
+            </>
+        )
+    }
+
+    var columns = [
+        {
+            field: 'name',
+            headerName: 'Country',
+            width: 180,
+            editable: true,
+        },
+
+        {
+            field: 'country_code',
+            headerName: 'Country Code',
+            width: 180,
+            editable: true,
+        },
+        {
+            field: 'currency_code',
+            headerName: 'Currency Code',
+            width: 180,
+            editable: true,
+        },
+        {
+            field: 'currency_name',
+            headerName: 'Currency Name',
+            width: 180,
+            editable: true,
+        },
+        {
+            field: 'Delete/Edit',
+            headerName: 'Delete/Edit',
+            width: 180,
+            renderCell: renderDetailsButton,
+            disableClickEventBubbling: true,
+        },
+
+    ];
 
     // fuctionality on Submit button to add country
     const handleSubmit = async () => {
@@ -112,7 +149,7 @@ export default function Country() {
     useEffect(() => {
         countries();
     }, [])
-    
+
     //API to get country by id to edit
     const handleCellClick = async (id) => {
         var token = window.localStorage.getItem("token");
@@ -124,13 +161,13 @@ export default function Country() {
         //         "Authorization": 'Bearer '+token,
         //     }
         // });
-        axios.post('https://api.medcollapp.com/api/country/update/11', { headers: { "Authorization": `Bearer ${token}` } })
+        axios.delete('https://api.medcollapp.com/api/country/delete/9', { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
                 setCountry(res.data);
             }).catch((error) => {
-                    console.log(error)
-                });
+                console.log(error.response.data.message)
+            });
         setOpenEditmodal(true)
     }
 
@@ -217,6 +254,8 @@ export default function Country() {
                         />
                     </Grid>
                     {openeditmodal ? <EditCountry show={openeditmodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
+
+                    {openDeletemodal ? <DeleteCountry show={openDeletemodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
 
                 </Grid> {/* main grid */}
 
