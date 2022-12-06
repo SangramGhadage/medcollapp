@@ -20,9 +20,12 @@ const DeleteCountry = ({ show, data, handleclose }) => {
 
     const handleonDelete = () => {
         var token = window.localStorage.getItem("token");
+        let id = data.id
+        console.log(id)
         axios.delete('https://api.medcollapp.com/api/country/delete/9', { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
+                window.reload();
             }).catch((error) => {
                 console.log(error.response.data.message)
             });

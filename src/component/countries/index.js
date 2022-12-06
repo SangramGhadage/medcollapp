@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, TextField, Button } from "@material-ui/core";
+import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
 import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -46,16 +46,20 @@ export default function Country() {
                         setOpenDeletemodal(true)
                     }}
                 >
+                        <Tooltip title="Delete Country" placement="top-start">
                     <DeleteIcon style={{ color: 'red' }} />
+                </Tooltip>
                 </Button>
                 <Button
                     size="small"
                     style={{ marginLeft: 10 }}
-                onClick={() => {
-                    setOpenEditmodal(true)
-                }}
+                    onClick={() => {
+                        setOpenEditmodal(true)
+                    }}
                 >
+                    <Tooltip title="Edit Country" placement="top-start">
                     <BorderColorIcon />
+                    </Tooltip>
                 </Button>
             </>
         )
@@ -124,9 +128,8 @@ export default function Country() {
             return JSON.stringify(addcountry?.data);
         }
         catch (error) {
-            console.log(error.response.data.message);
+            alert(error.response.data.message);
         }
-        console.log(vectorIcone);
     };
 
     //Api call to show all countries in table
@@ -154,7 +157,7 @@ export default function Country() {
     const handleCellClick = async (row) => {
         setCountry(row)
         console.log(row)
-        
+
     }
 
     return (
@@ -178,7 +181,7 @@ export default function Country() {
 
                             }}>
                             Add Country
-                    </Typography>
+                        </Typography>
                     </Grid>
                     <Grid container direction='row'>
                         <Grid item xs={2}>
@@ -186,7 +189,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div style={{ marginTop: '10px' }}>
-                                <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{shrink: true}} />
+                                <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -194,7 +197,7 @@ export default function Country() {
                                 <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{shrink: true}} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -202,12 +205,12 @@ export default function Country() {
                                 <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{shrink: true}} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                             <div>
-                                <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="Currency Code" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
                                 <TextField style={{ marginTop: '10px' }} value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
