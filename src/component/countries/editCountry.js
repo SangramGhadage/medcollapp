@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { Button, Slide, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -16,6 +17,18 @@ const EditCountry = ({ show, data, handleclose }) => {
     const navigate = useNavigate();
 
     const [maxWidth, setMaxWidth] = React.useState('md');
+
+    const handleEditCountry =async () => {
+        var token = window.localStorage.getItem("token");
+        console.log(token)
+        const getCountryById = await axios.post('https://api.medcollapp.com/api/country/update/11', {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+                // "Authorization": 'Bearer '+token,
+            }
+        });
+    }
 
     return (
         <>
@@ -40,7 +53,7 @@ const EditCountry = ({ show, data, handleclose }) => {
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <Button className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
+                                    <Button onClick={handleEditCountry} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
                                         Submit
                                     </Button>
                                 </Grid>

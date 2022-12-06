@@ -5,17 +5,29 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { Button, Slide, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const DeleteCountry = ({ show, data, handleclose }) => {
-    console.log(data)
+   
     const classes = useStyles();
     const navigate = useNavigate();
 
     const [maxWidth, setMaxWidth] = React.useState('md');
+
+    const handleonDelete = () => {
+        var token = window.localStorage.getItem("token");
+        axios.delete('https://api.medcollapp.com/api/country/delete/9', { headers: { "Authorization": `Bearer ${token}` } })
+            .then(res => {
+                console.log(res.data);
+            }).catch((error) => {
+                console.log(error.response.data.message)
+            });
+            console.log(data)
+    }
 
     return (
         <>
@@ -25,27 +37,22 @@ const DeleteCountry = ({ show, data, handleclose }) => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                {/* <DialogTitle id="alert-dialog-title" style={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: 20, color: '#000000' }}>{"Edit Country"}
-                    <IconButton edge="start" color="inherit" onClick={handleclose} aria-label="close" style={{ float: 'right', color: '#2C7FB2', backgroundColor: '#F0F0F0' }}>
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle> */}
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         <Grid container>
-                            <Grid item xs={12} style={{textAlign: 'center',}}>
-                            <h4>Are yor sure you want to delete this country</h4>
+                            <Grid item xs={12} style={{ textAlign: 'center', }}>
+                                <h4>Are yor sure you want to delete this country</h4>
                             </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
-                                        Cancel
+                            <Grid item xs={12} sm={6}>
+                                <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
+                                    Cancel
                                     </Button>
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <Button className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
-                                        Delete
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Button onClick={handleonDelete} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
+                                    Delete
                                     </Button>
-                                </Grid>
+                            </Grid>
 
                         </Grid>
                     </DialogContentText>

@@ -51,9 +51,9 @@ export default function Country() {
                 <Button
                     size="small"
                     style={{ marginLeft: 10 }}
-                // onClick={() => {
-                //     parseName(params.row.id)
-                // }}
+                onClick={() => {
+                    setOpenEditmodal(true)
+                }}
                 >
                     <BorderColorIcon />
                 </Button>
@@ -110,7 +110,7 @@ export default function Country() {
             name: formValues.countryName,
             photos: formValues.photos,
             tags: formValues.tags,
-            vactor_icon: vectorIcone
+            vactor_icon: formValues.vectorIcone
 
         }
         try {
@@ -151,24 +151,10 @@ export default function Country() {
     }, [])
 
     //API to get country by id to edit
-    const handleCellClick = async (id) => {
-        var token = window.localStorage.getItem("token");
-        console.log(token)
-        // const getCountryById = await axios.post('https://api.medcollapp.com/api/country/update/'+ id, {
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         // "Authorization": `Bearer ${token}`,
-        //         "Authorization": 'Bearer '+token,
-        //     }
-        // });
-        axios.delete('https://api.medcollapp.com/api/country/delete/9', { headers: { "Authorization": `Bearer ${token}` } })
-            .then(res => {
-                console.log(res.data);
-                setCountry(res.data);
-            }).catch((error) => {
-                console.log(error.response.data.message)
-            });
-        setOpenEditmodal(true)
+    const handleCellClick = async (row) => {
+        setCountry(row)
+        console.log(row)
+        
     }
 
     return (
@@ -200,7 +186,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div style={{ marginTop: '10px' }}>
-                                <TextField className={classes.textField} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" />
+                                <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{shrink: true}} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -208,7 +194,7 @@ export default function Country() {
                                 <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{shrink: true}} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -216,7 +202,7 @@ export default function Country() {
                                 <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{shrink: true}} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -255,7 +241,7 @@ export default function Country() {
                     </Grid>
                     {openeditmodal ? <EditCountry show={openeditmodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
 
-                    {openDeletemodal ? <DeleteCountry show={openDeletemodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
+                    {openDeletemodal ? <DeleteCountry show={openDeletemodal} data={country} handleclose={() => setOpenDeletemodal(false)} /> : null}
 
                 </Grid> {/* main grid */}
 
