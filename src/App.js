@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SideBar from './component/sideBar/main'
 import Login from './component/adminLogin/index'
 import Country from './component/countries/index'
+import States from './component/states/index';
 
 function App() {
   const user = window.localStorage.getItem("user")
@@ -18,6 +19,7 @@ function App() {
           <Route exact path='/' element={<Login/>} />
           <Route exact path='/SideBar' element={<SideBar/>} />
           <Route exact path='/Country' element={<Country/>} />
+          <Route exact path='/States' element={<States/>} />
           </Routes>
         </Router>
       </div>

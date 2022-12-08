@@ -14,8 +14,6 @@ import DeleteCountry from './deleteCountry'
 
 const drawerWidth = 260;
 
-
-
 export default function Country() {
     const classes = useStyles();
     const theme = useTheme();
@@ -46,9 +44,9 @@ export default function Country() {
                         setOpenDeletemodal(true)
                     }}
                 >
-                        <Tooltip title="Delete Country" placement="top-start">
-                    <DeleteIcon style={{ color: 'red' }} />
-                </Tooltip>
+                    <Tooltip title="Delete Country" placement="top-start">
+                        <DeleteIcon style={{ color: 'red' }} />
+                    </Tooltip>
                 </Button>
                 <Button
                     size="small"
@@ -58,7 +56,7 @@ export default function Country() {
                     }}
                 >
                     <Tooltip title="Edit Country" placement="top-start">
-                    <BorderColorIcon />
+                        <BorderColorIcon />
                     </Tooltip>
                 </Button>
             </>
@@ -153,13 +151,14 @@ export default function Country() {
         countries();
     }, [])
 
-    //API to get country by id to edit
+    //get rowClick country
     const handleCellClick = async (row) => {
         setCountry(row)
         console.log(row)
-
     }
-
+    const handleStatePage = () => {
+        navigate('/States')
+    }
     return (
         <>
             <div className={classes.root} style={{ backgroundColor: '#ffffff' }}>
@@ -170,7 +169,7 @@ export default function Country() {
                     })}
                     direction="row"
                 >
-                    <Grid item xs={12} >
+                    <Grid item xs={6} >
                         <Typography variant="h5" noWrap={true}
                             style={{
                                 fontFamily: 'Poppins',
@@ -182,6 +181,9 @@ export default function Country() {
                             }}>
                             Add Country
                         </Typography>
+                    </Grid>
+                    <Grid item xs={6} >
+                        <Button className={classes.btn} onClick={() => handleStatePage()}>States</Button>
                     </Grid>
                     <Grid container direction='row'>
                         <Grid item xs={2}>
