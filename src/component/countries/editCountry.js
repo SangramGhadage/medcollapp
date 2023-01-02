@@ -104,7 +104,7 @@ const EditCountry = ({ show, data, handleclose }) => {
                             <Grid item xs={12} sm={6} >
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
+                                        <TextField value={formValues.currencyCode} name="CurrencyCode" className={classes.textField} id="outlined-basic" type='text' label="Currency Code" variant="outlined" size="small" onChange={handleChange} />
                                     </div>
                                 </center>
                             </Grid>

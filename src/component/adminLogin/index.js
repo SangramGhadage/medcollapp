@@ -50,9 +50,11 @@ export default function Login() {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if(data.message !== "unauthorized"){
-                    window.localStorage.setItem("user", JSON.stringify(data.user))
-                    window.localStorage.setItem("token", data.token)
+                window.localStorage.setItem("token", data.token)
+
+                if(data.message == "Login Successfully"){
+                    window.localStorage.setItem("user", JSON.stringify(data.data.user))
+                    window.localStorage.setItem("token", data.data.token)
                     navigate('/sideBar')
                 }else{
                     alert(data.message)

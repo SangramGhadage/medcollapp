@@ -115,12 +115,15 @@ export default function Country() {
             vactor_icon: formValues.vectorIcone
 
         }
+        var formData = new FormData();
+        formData.append('image',  formValues.vectorIcone);
         try {
-            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', object,
+            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', formData, object,
                 {
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
+                        
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
                     }
                 })
             return JSON.stringify(addcountry?.data);
@@ -212,7 +215,7 @@ export default function Country() {
                         </Grid>
                         <Grid item xs={2}>
                             <div>
-                                <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
+                                <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="currency Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
                                 <TextField style={{ marginTop: '10px' }} value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />

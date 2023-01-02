@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Grid, Typography, TextField, Button } from "@material-ui/core";
+import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
 import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
+import DeleteState from './deleteState'
 import Navbar from "../sideBar/main";
 
 const drawerWidth = 260;
@@ -16,7 +19,38 @@ export default function States() {
     const [allCountries, setAllCountries] = useState([]);
     const [allStates, setAllStates] = useState([])
     const [country, setCountry] = useState('');
+    const [state, setState] = useState('');
 
+
+
+    const renderDetailsButton = (params) => {
+        return (
+            <>
+                <Button
+                    size="small"
+                    style={{ marginLeft: 10, }}
+                    // onClick={() => {
+                    //     setOpenDeletemodal(true)
+                    // }}
+                >
+                    <Tooltip title="Delete Country" placement="top-start">
+                        <DeleteIcon style={{ color: 'red' }} />
+                    </Tooltip>
+                </Button>
+                <Button
+                    size="small"
+                    style={{ marginLeft: 10 }}
+                    // onClick={() => {
+                    //     setOpenEditmodal(true)
+                    // }}
+                >
+                    <Tooltip title="Edit Country" placement="top-start">
+                        <BorderColorIcon />
+                    </Tooltip>
+                </Button>
+            </>
+        )
+    }
     var columns = [
         {
             field: 'name',
@@ -31,13 +65,13 @@ export default function States() {
             width: 180,
             editable: true,
         },
-        // {
-        //     field: 'Delete/Edit',
-        //     headerName: 'Delete/Edit',
-        //     width: 180,
-        //     renderCell: renderDetailsButton,
-        //     disableClickEventBubbling: true,
-        // },
+        {
+            field: 'Delete/Edit',
+            headerName: 'Delete/Edit',
+            width: 180,
+            renderCell: renderDetailsButton,
+            disableClickEventBubbling: true,
+        },
 
     ];
     //api to get country
@@ -78,6 +112,10 @@ export default function States() {
         }
         console.log(allStates)
     }
+    const handleCellClick = async (row) => {
+        setState(row)
+        console.log(row)
+    }
     useEffect(() => {
         countries();
     }, [])
@@ -112,9 +150,9 @@ export default function States() {
                             pageSize={5}
                             rowsPerPageOptions={[5]}
                             columnWidth={5}
-                        // onRowClick={(newSelection) => {
-                        //     handleCellClick(newSelection.row);
-                        // }}
+                            onRowClick={(newSelection) => {
+                                handleCellClick(newSelection.row);
+                            }}
                         />
                     </Grid>
                 </Grid >
