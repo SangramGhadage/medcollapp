@@ -100,38 +100,7 @@ export default function Country() {
     ];
 
     // fuctionality on Submit button to add country
-    // const handleSubmit = async () => {
-    //     var token = window.localStorage.getItem("token");
-    //     const object = {
-    //         banner_image: formValues.bannerImage,
-    //         country_code: formValues.countryCode,
-    //         currency_code: formValues.currencyCode,
-    //         currency_name: formValues.currencyName,
-    //         currency_symbol: formValues.currencySymbol,
-    //         language_code: formValues.languageCode,
-    //         name: formValues.countryName,
-    //         photos: formValues.photos,
-    //         tags: formValues.tags,
-    //         vactor_icon: formValues.vectorIcone
-
-    //     }
-    //     var formData = new FormData();
-    //     formData.append('image',  formValues.vectorIcone);
-    //     try {
-    //         const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', object,
-    //             {
-    //                 headers: {
-                        
-    //                     "Authorization": `Bearer ${token}`,
-    //                     "Content-Type": 'multipart/form-data;boundary=------23465987892',
-    //                 }
-    //             })
-    //         return JSON.stringify(addcountry?.data);
-    //     }
-    //     catch (error) {
-    //         alert(error.response.data.message);
-    //     }
-    // };
+    
     const handleSubmit = async () => {
         var token = window.localStorage.getItem('token');
         const vectorIcon = document.querySelector("#vectorIcon");

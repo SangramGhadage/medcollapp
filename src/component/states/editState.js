@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DeleteState = ({ show, data, handleclose }) => {
+export default function EditState  ({ show, data, handleclose }) {
    
     const classes = useStyles();
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const DeleteState = ({ show, data, handleclose }) => {
                     <DialogContentText id="alert-dialog-description">
                         <Grid container>
                             <Grid item xs={12} style={{ textAlign: 'center', }}>
-                                <h4>Are yor sure you want to delete this country</h4>
+                                {/* <h4>Are yor sure you want to delete this country</h4> */}
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
@@ -53,7 +53,7 @@ const DeleteState = ({ show, data, handleclose }) => {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Button onClick={handleonDelete} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
-                                    Delete
+                                    Update
                                     </Button>
                             </Grid>
 
@@ -66,7 +66,7 @@ const DeleteState = ({ show, data, handleclose }) => {
     )
 }
 
-export default DeleteState
+// export default editState
 
 const drawerWidth = 240;
 

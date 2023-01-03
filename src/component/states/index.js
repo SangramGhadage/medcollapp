@@ -7,7 +7,8 @@ import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
-import DeleteState from './deleteState'
+import DeleteState from './deleteState';
+import EditState from './editState'
 import Navbar from "../sideBar/main";
 
 const drawerWidth = 260;
@@ -16,6 +17,9 @@ export default function States() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
+    const [openEditmodal, setOpenEditmodal] = React.useState(false);
+
     const [allCountries, setAllCountries] = useState([]);
     const [allStates, setAllStates] = useState([])
     const [country, setCountry] = useState('');
@@ -29,9 +33,9 @@ export default function States() {
                 <Button
                     size="small"
                     style={{ marginLeft: 10, }}
-                    // onClick={() => {
-                    //     setOpenDeletemodal(true)
-                    // }}
+                    onClick={() => {
+                        setOpenDeletemodal(true)
+                    }}
                 >
                     <Tooltip title="Delete Country" placement="top-start">
                         <DeleteIcon style={{ color: 'red' }} />
@@ -40,9 +44,9 @@ export default function States() {
                 <Button
                     size="small"
                     style={{ marginLeft: 10 }}
-                    // onClick={() => {
-                    //     setOpenEditmodal(true)
-                    // }}
+                    onClick={() => {
+                        setOpenEditmodal(true)
+                    }}
                 >
                     <Tooltip title="Edit Country" placement="top-start">
                         <BorderColorIcon />
@@ -71,6 +75,7 @@ export default function States() {
             width: 180,
             renderCell: renderDetailsButton,
             disableClickEventBubbling: true,
+            
         },
 
     ];
@@ -155,6 +160,9 @@ export default function States() {
                             }}
                         />
                     </Grid>
+                    {openDeletemodal ? <DeleteState show={openDeletemodal} data={state} handleclose={() => setOpenDeletemodal(false)} /> : null}
+
+                    {openEditmodal ? <EditState show={openEditmodal} data={state} handleclose={() => setOpenEditmodal(false)} /> : null}
                 </Grid >
             </div>
 
