@@ -100,38 +100,72 @@ export default function Country() {
     ];
 
     // fuctionality on Submit button to add country
-    const handleSubmit = async () => {
-        var token = window.localStorage.getItem("token");
-        const object = {
-            banner_image: formValues.bannerImage,
-            country_code: formValues.countryCode,
-            currency_code: formValues.currencyCode,
-            currency_name: formValues.currencyName,
-            currency_symbol: formValues.currencySymbol,
-            language_code: formValues.languageCode,
-            name: formValues.countryName,
-            photos: formValues.photos,
-            tags: formValues.tags,
-            vactor_icon: formValues.vectorIcone
+    // const handleSubmit = async () => {
+    //     var token = window.localStorage.getItem("token");
+    //     const object = {
+    //         banner_image: formValues.bannerImage,
+    //         country_code: formValues.countryCode,
+    //         currency_code: formValues.currencyCode,
+    //         currency_name: formValues.currencyName,
+    //         currency_symbol: formValues.currencySymbol,
+    //         language_code: formValues.languageCode,
+    //         name: formValues.countryName,
+    //         photos: formValues.photos,
+    //         tags: formValues.tags,
+    //         vactor_icon: formValues.vectorIcone
 
-        }
-        var formData = new FormData();
-        formData.append('image',  formValues.vectorIcone);
-        try {
-            const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', formData, object,
-                {
-                    headers: {
+    //     }
+    //     var formData = new FormData();
+    //     formData.append('image',  formValues.vectorIcone);
+    //     try {
+    //         const addcountry = await axios.post('https://api.medcollapp.com/api/country/add', object,
+    //             {
+    //                 headers: {
                         
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data",
-                    }
-                })
-            return JSON.stringify(addcountry?.data);
+    //                     "Authorization": `Bearer ${token}`,
+    //                     "Content-Type": 'multipart/form-data;boundary=------23465987892',
+    //                 }
+    //             })
+    //         return JSON.stringify(addcountry?.data);
+    //     }
+    //     catch (error) {
+    //         alert(error.response.data.message);
+    //     }
+    // };
+    const handleSubmit = async () => {
+        var token = window.localStorage.getItem('token');
+        const vectorIcon = document.querySelector("#vectorIcon");
+        const bannerImage = document.querySelector("#bannerImage");
+        const photos = document.querySelector("#photos");
+      
+        var formData = new FormData();
+        formData.append('banner_image', bannerImage.files[0]);
+        formData.append('country_code', formValues.countryCode);
+        formData.append('currency_code', formValues.currencyCode);
+        formData.append('currency_name', formValues.currencyName);
+        formData.append('currency_symbol', formValues.currencySymbol);
+        formData.append('language_code', formValues.languageCode);
+        formData.append('name', formValues.countryName);
+        formData.append('photos', photos.files[0]);
+        formData.append('tags', formValues.tags);
+        formData.append('vactor_icon', vectorIcon.files[0]);
+      
+        try {
+          const addcountry = await axios.post(
+            'https://api.medcollapp.com/api/country/add',
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          return JSON.stringify(addcountry?.data);
+        } catch (error) {
+          alert(error.response.data.message);
         }
-        catch (error) {
-            alert(error.response.data.message);
-        }
-    };
+      };
+      
 
     //Api call to show all countries in table
     const countries = async () => {
@@ -194,7 +228,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div style={{ marginTop: '10px' }}>
-                                <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
+                                <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone"  type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -202,7 +236,7 @@ export default function Country() {
                                 <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -210,7 +244,7 @@ export default function Country() {
                                 <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>

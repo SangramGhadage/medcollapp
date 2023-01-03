@@ -22,7 +22,7 @@ const DeleteCountry = ({ show, data, handleclose }) => {
         var token = window.localStorage.getItem("token");
         let id = data.id
         console.log(id)
-        axios.delete('https://api.medcollapp.com/api/country/delete/9', { headers: { "Authorization": `Bearer ${token}` } })
+        axios.delete('https://api.medcollapp.com/api/country/delete/'+ id, { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
                 window.reload();

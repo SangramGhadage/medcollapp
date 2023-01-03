@@ -18,7 +18,18 @@ const EditCountry = ({ show, data, handleclose }) => {
 
     const [maxWidth, setMaxWidth] = React.useState('md');
 
-    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcone: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
+    const initialValues = {
+        countryName: data ? data.name : '',
+        countryCode: data ? data.country_code : '',
+        languageCode: data ? data.language_code : '',
+        currencyCode: data ? data.currency_code : '',
+        currencySymbol: data ? data.currency_symbol : '',
+        vectorIcone: [],
+        photos: [],
+        bannerImage: [],
+        tags: data ? data.tags : '',
+        currencyName: data ? data.currency_name : ''
+    }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
@@ -31,28 +42,33 @@ const EditCountry = ({ show, data, handleclose }) => {
     const handleEditCountry = async () => {
         var token = window.localStorage.getItem("token");
         let id = data.id
-        const object = {
-            banner_image: formValues.bannerImage,
-            country_code: formValues.countryCode,
-            currency_code: formValues.currencyCode,
-            currency_name: formValues.currencyName,
-            currency_symbol: formValues.currencySymbol,
-            language_code: formValues.languageCode,
-            name: formValues.countryName,
-            photos: formValues.photos,
-            tags: formValues.tags,
-            vactor_icon: formValues.vectorIcone
 
-        }
+        const vectorIcon = document.querySelector("#vectorIcon");
+        const bannerImage = document.querySelector("#bannerImage");
+        const photos = document.querySelector("#photos");
+
+        var formData = new FormData();
+        formData.append('banner_image', bannerImage.files[0]);
+        formData.append('country_code', formValues.countryCode);
+        formData.append('currency_code', formValues.currencyCode);
+        formData.append('currency_name', formValues.currencyName);
+        formData.append('currency_symbol', formValues.currencySymbol);
+        formData.append('language_code', formValues.languageCode);
+        formData.append('name', formValues.countryName);
+        formData.append('photos', photos.files[0]);
+        formData.append('tags', formValues.tags);
+        formData.append('vactor_icon', vectorIcon.files[0]);
         try {
-            const editCountry = await axios.post('https://api.medcollapp.com/api/country/update/'+ id, object,
+            const editCountry = await axios.put('https://api.medcollapp.com/api/country/update/' + id, formData,
                 {
                     headers: {
-                        "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
                     }
                 })
-            return JSON.stringify(editCountry?.data);
+                if(data.message == "Country Updated"){
+                    alert(data.message)
+                    return JSON.stringify(editCountry?.data);
+                }
         }
         catch (error) {
             console.log(error.response.data.message);
@@ -118,21 +134,21 @@ const EditCountry = ({ show, data, handleclose }) => {
                             <Grid item xs={12} sm={6}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="outlined-basic" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
+                                        <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="vectorIcon" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>
                             <Grid item xs={12} sm={6} style={{ borderRight: '1px solid #F0F0F0' }}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="outlined-basic" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                        <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="outlined-basic" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                        <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>
