@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
-        backgroundColor: 'white',
+        // backgroundColor: 'transparent',
+        boxShadow: 'none !important'
     },
     title: {
         flexGrow: 1,
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        backgroundColor: '#00A7EE',
+        backgroundColor: 'transparent',
         fontFamily: '"Poppins", san-serif;',
         fontStyle: 'normal',
         fontWeight: 400,
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing(7) + 1,
         },
-        backgroundColor: '#00A7EE',
+        backgroundColor: 'transparent',
         color: '#fff'
     },
     toolbar: {
@@ -181,7 +182,7 @@ export default function SideBar() {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'transparent', boxShadow: 'none' }}
             >
                 <Toolbar>
                     <IconButton

@@ -100,13 +100,13 @@ export default function Country() {
     ];
 
     // fuctionality on Submit button to add country
-    
+
     const handleSubmit = async () => {
         var token = window.localStorage.getItem('token');
         const vectorIcon = document.querySelector("#vectorIcon");
         const bannerImage = document.querySelector("#bannerImage");
         const photos = document.querySelector("#photos");
-      
+
         var formData = new FormData();
         formData.append('banner_image', bannerImage.files[0]);
         formData.append('country_code', formValues.countryCode);
@@ -118,23 +118,23 @@ export default function Country() {
         formData.append('photos', photos.files[0]);
         formData.append('tags', formValues.tags);
         formData.append('vactor_icon', vectorIcon.files[0]);
-      
+
         try {
-          const addcountry = await axios.post(
-            'https://api.medcollapp.com/api/country/add',
-            formData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          return JSON.stringify(addcountry?.data);
+            const addcountry = await axios.post(
+                'https://api.medcollapp.com/api/country/add',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            return JSON.stringify(addcountry?.data);
         } catch (error) {
-          alert(error.response.data.message);
+            alert(error.response.data.message);
         }
-      };
-      
+    };
+
 
     //Api call to show all countries in table
     const countries = async () => {
@@ -147,6 +147,7 @@ export default function Country() {
                         "Authorization": `Bearer ${token}`
                     }
                 });
+                // window.location.reload()
             setAllCountries(response?.data?.data)
         }
         catch (error) {
@@ -167,13 +168,20 @@ export default function Country() {
     }
     return (
         <>
-            <div className={classes.root} style={{ backgroundColor: '#ffffff' }}>
+            <div className={classes.root} style={{}}>
                 <Navbar />
                 <Grid container spacing={2}
                     className={clsx(classes.grid, {
                         [classes.gridShift]: open,
                     })}
-                    direction="row"
+                    direction="row" style={{backgroundColor: '#f0ffffd9',
+                        border: '2px solid dodgerblue',
+                        boxShadow: '10px 10px 3px 6px #fff4',
+                        /* width: 100%; */
+                        margin: '5% 3% 2% 3%',
+                        padding: '2%',
+                        borderRadius: '0 15px',
+                    }}
                 >
                     <Grid item xs={6} >
                         <Typography variant="h5" noWrap={true}
@@ -197,7 +205,7 @@ export default function Country() {
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                             <div style={{ marginTop: '10px' }}>
-                                <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone"  type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
+                                <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
                             </div>
                         </Grid>
                         <Grid item xs={2}>
@@ -238,7 +246,7 @@ export default function Country() {
                     </Grid>
                     <Grid item xs={12} >
                         <DataGrid
-                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', marginTop: 20, marginRight: 20 }}
+                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
                             rows={allCountries}
                             rowHeight={40}
                             columns={columns}
@@ -266,7 +274,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
-        backgroundColor: 'white',
     },
     grid: {
         overflow: 'hidden',

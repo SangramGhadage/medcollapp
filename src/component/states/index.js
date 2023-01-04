@@ -9,6 +9,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import DeleteState from './deleteState';
 import EditState from './editState'
+import AddState from "./addState";
 import Navbar from "../sideBar/main";
 
 const drawerWidth = 260;
@@ -19,6 +20,7 @@ export default function States() {
     const [open, setOpen] = React.useState(false);
     const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
     const [openEditmodal, setOpenEditmodal] = React.useState(false);
+    const [openAddmodal, setOpenAddmodal] = React.useState(false);
 
     const [allCountries, setAllCountries] = useState([]);
     const [allStates, setAllStates] = useState([])
@@ -75,7 +77,7 @@ export default function States() {
             width: 180,
             renderCell: renderDetailsButton,
             disableClickEventBubbling: true,
-            
+
         },
 
     ];
@@ -115,24 +117,35 @@ export default function States() {
         catch (error) {
             return (error.response.data.message)
         }
-        console.log(allStates)
+        // console.log(allStates)
     }
     const handleCellClick = async (row) => {
         setState(row)
         console.log(row)
+    }
+
+    const handleAddState = () =>{
+            setOpenAddmodal(true)
+            console.log(country);
     }
     useEffect(() => {
         countries();
     }, [])
     return (
         <>
-            <div className={classes.root} style={{ backgroundColor: '#ffffff' }}>
+            <div className={classes.root} style={{ }}>
                 <Navbar />
                 <Grid container spacing={2}
                     className={clsx(classes.grid, {
                         [classes.gridShift]: open,
                     })}
-                    direction="row"
+                    direction="row" style={{backgroundColor: '#f0ffffd9',
+                    border: '2px solid dodgerblue',
+                    boxShadow: '10px 10px 3px 6px #fff4',
+                    /* width: 100%; */
+                    margin: '5% 3% 2% 3%',
+                    padding: '2%',
+                    borderRadius: '0 15px',}}
                 >
                     <Grid item xs={12}>
                         {/* <h1>hello</h1> */}
@@ -145,6 +158,9 @@ export default function States() {
                     </Grid>
                     <Grid item xs={3}>
                         <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button>
                     </Grid>
                     <Grid item xs={12} >
                         <DataGrid
@@ -163,6 +179,8 @@ export default function States() {
                     {openDeletemodal ? <DeleteState show={openDeletemodal} data={state} handleclose={() => setOpenDeletemodal(false)} /> : null}
 
                     {openEditmodal ? <EditState show={openEditmodal} data={state} handleclose={() => setOpenEditmodal(false)} /> : null}
+
+                    {openAddmodal ? <AddState show={openAddmodal} data={country} handleclose={() => setOpenAddmodal(false)} /> : null}
                 </Grid >
             </div>
 
@@ -173,7 +191,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
-        backgroundColor: 'white',
     },
     grid: {
         overflow: 'hidden',

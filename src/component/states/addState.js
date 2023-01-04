@@ -3,39 +3,40 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Button, Slide, Dialog, TextField, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
-import { Stack } from '@mui/material';
+import { Button, Slide, TextField, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
+import { Stack } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditState  ({ show, data, handleclose }) {
-   
-    const initialValues = { stateName: data? data.name: '', StateShortName:data? data.state_shortname: '', languageCode: data? data.language_code: '', vectorIcone: [] , photos: [], bannerImage: [], tags: data? data.tags: '' }
+export default function AddState({ show, data, handleclose }) {
+
+    const classes = useStyles();
+    const navigate = useNavigate();
+
+    const initialValues = { stateName: "", StateShortName: "", languageCode: "", vectorIcone: [], photos: [], bannerImage: [], tags: "" }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
     }
-    const classes = useStyles();
-    const navigate = useNavigate();
 
     const [maxWidth, setMaxWidth] = React.useState('md');
 
-
-    const handleEdit = async () => {
+    const handleAdd = async () => {
         var token = window.localStorage.getItem("token");
-        let id = data.id
+        const id = data
         console.log(id)
-
         const vectorIcon = document.querySelector("#vectorIcon");
         const bannerImage = document.querySelector("#bannerImage");
         const photos = document.querySelector("#photos");
 
         var formData = new FormData();
+        formData.append('country_id', id);
         formData.append('name', formValues.stateName);
         formData.append('state_shortname', formValues.StateShortName);
         formData.append('language_code', formValues.languageCode);
@@ -43,8 +44,10 @@ export default function EditState  ({ show, data, handleclose }) {
         formData.append('banner_image', bannerImage.files[0]);
         formData.append('photos[]', photos.files[0]);
         formData.append('vactor_icon', vectorIcon.files[0]);
+
         try {
-            const updateState = await axios.post('https://api.medcollapp.com/api/states/update/'+ id,
+            const addState = await axios.post(
+                'https://api.medcollapp.com/api/states/add',
                 formData,
                 {
                     headers: {
@@ -52,11 +55,14 @@ export default function EditState  ({ show, data, handleclose }) {
                     },
                 }
             );
-            return JSON.stringify(updateState?.data);
+            alert('state added successfull')
+            window.location.reload()
+            return JSON.stringify(addState?.data);
 
         } catch (error) {
             alert(error.response.data.message);
         }
+        console.log(formValues.stateName)
     }
 
     return (
@@ -69,7 +75,7 @@ export default function EditState  ({ show, data, handleclose }) {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                    <Stack spacing={2} direction='row' justifyContent='space-between'>
+                        <Stack spacing={2} direction='row' justifyContent='space-between'>
                             <TextField value={formValues.stateName} name="stateName" className={classes.textField} id="outlined-basic" type='text' label="State Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.StateShortName} name="StateShortName" className={classes.textField} id="outlined-basic" type='text' label="State Short Name" variant="outlined" size="small" onChange={handleChange} />
@@ -91,12 +97,12 @@ export default function EditState  ({ show, data, handleclose }) {
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
                                     Cancel
-                                    </Button>
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Button onClick={handleEdit} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
-                                    Update
-                                    </Button>
+                                <Button onClick={handleAdd} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
+                                    Add
+                                </Button>
                             </Grid>
 
                         </Grid>

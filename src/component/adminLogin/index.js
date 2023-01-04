@@ -62,17 +62,6 @@ export default function Login() {
             })
     }
 
-    
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const payload = {
-    //         email: email,
-    //         password: password,
-    //     };
-    //     const res = await loginUser(payload);
-    //     console.log({ payload, res });
-    // };
-
 
     const handleClickShowPassword = () => {
         setshowPassword(!showPassword);
@@ -85,7 +74,7 @@ export default function Login() {
     return (
 
         <div className={classes.root}>
-            <img src="companyLogo.jpeg" alt="logo" height='10px' style={{ flex: 1 }} />
+            {/* <img src="companyLogo.jpeg" alt="logo" height='10px' style={{ flex: 1 }} /> */}
             <div className={classes.loginBox}>
                 <form onSubmit={handleSubmit}>
                     <Grid container>
@@ -126,13 +115,13 @@ export default function Login() {
 
 const useStyles = makeStyles(() => ({
     root: {
-        width: '100vw',
-        minHeight: '100vh',
+        width: '100%',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent:
             'center',
-        alignItems: 'center'
+        alignItems: 'flex-end',
     },
     loginBox: {
         maxWidth: '100%',
@@ -141,7 +130,8 @@ const useStyles = makeStyles(() => ({
         // border: '2px solid red',
         textAlign: 'center',
         borderRadius: '10px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+        marginRight: '3%'
 
     },
     textField: {

@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const DeleteCountry = ({ show, data, handleclose }) => {
-   
+
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -22,14 +22,16 @@ const DeleteCountry = ({ show, data, handleclose }) => {
         var token = window.localStorage.getItem("token");
         let id = data.id
         console.log(id)
-        axios.delete('https://api.medcollapp.com/api/country/delete/'+ id, { headers: { "Authorization": `Bearer ${token}` } })
+        
+        axios.delete('https://api.medcollapp.com/api/country/delete/' + id,
+            { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
-                window.reload();
+                window.location.reload();
             }).catch((error) => {
                 console.log(error.response.data.message)
             });
-            console.log(data)
+        console.log(data)
     }
 
     return (
@@ -49,12 +51,12 @@ const DeleteCountry = ({ show, data, handleclose }) => {
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
                                     Cancel
-                                    </Button>
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Button onClick={handleonDelete} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
                                     Delete
-                                    </Button>
+                                </Button>
                             </Grid>
 
                         </Grid>
