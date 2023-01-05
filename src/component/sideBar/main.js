@@ -7,12 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CloseIcon from '@mui/icons-material/Close';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import HomeIcon from '@material-ui/icons/Home';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import logoPng from '../../assests/mainlogo.png'
 import Navbar from './index'
 
 const drawerWidth = 260;
@@ -44,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: 36,
-        color: '#00A7EE'
+        color: '#00A7EE',
     },
     hide: {
         display: 'none',
@@ -215,14 +211,14 @@ export default function SideBar() {
                     </Menu>
                     <div className={classes.appName}>
                         {/* <h1 style={{ fontSize: '1.5rem' }}>medcollapp</h1> */}
-                        <img src="companyLogo.jpeg" alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
+                        <img src={logoPng} alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
                     </div>
                     <div className={classes.drname}>
 
                     </div>
                     {auth && (
                         <div className={classes.profile}>
-                            <IconButton
+                            {/* <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
@@ -231,10 +227,10 @@ export default function SideBar() {
 
                             >
                                 <Avatar style={{ borderRadius: 50, height: 40, width: 40 }} />
-                            </IconButton>
+                            </IconButton> */}
 
 
-                            <Menu
+                            {/* <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorElProfile}
                                 anchorOrigin={{
@@ -251,7 +247,8 @@ export default function SideBar() {
                             >
                                 <MenuItem>Profile</MenuItem>
                                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-                            </Menu>
+                            </Menu> */}
+                            <LogoutIcon onClick={handleLogOut} style={{backgroundColor: '#dc3545', color: '#fff', fontSize: '44px', padding: '12px', borderRadius: '4px', marginLeft: '-74%', cursor: 'pointer'}}/>
                         </div>
                     )}
 
