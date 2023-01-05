@@ -38,14 +38,13 @@ const EditCountry = ({ show, data, handleclose }) => {
         // const file = e.target.files;
         // setVectorIcon(file)
     }
-
     const handleEditCountry = async () => {
         var token = window.localStorage.getItem("token");
         let id = data.id
 
-        const vectorIcon = document.querySelector("#vectorIcon");
-        const bannerImage = document.querySelector("#bannerImage");
-        const photos = document.querySelector("#photos");
+        const vectorIcon = document.querySelector("#UCvectorIcon");
+        const bannerImage = document.querySelector("#UCbannerImage");
+        const photos = document.querySelector("#UCphotos");
 
         var formData = new FormData();
         formData.append('banner_image', bannerImage.files[0]);
@@ -58,21 +57,40 @@ const EditCountry = ({ show, data, handleclose }) => {
         formData.append('photos', photos.files[0]);
         formData.append('tags', formValues.tags);
         formData.append('vactor_icon', vectorIcon.files[0]);
-        try {
-            const editCountry = await axios.put('https://api.medcollapp.com/api/country/update/' + id, formData,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-                if(data.message == "Country Updated"){
-                    alert(data.message)
-                    return JSON.stringify(editCountry?.data);
-                }
-        }
-        catch (error) {
-            console.log(error.response.data.message);
-        }
+        // try {
+        //     const editCountry = await axios.put('https://api.medcollapp.com/api/country/update/' + id, formData,
+        //         {
+        //             headers: {
+        //                 "Authorization": `Bearer ${token}`
+        //             }
+        //         })
+        //     let response = JSON.parse(editCountry);
+        //     if (response.message == 'Country Updated') {
+        //         alert('Country updated Successfully');
+        //     }
+        //     else {
+        //         alert(response.message);
+        //     }
+        //     return JSON.stringify(editCountry?.data);
+
+        // }
+        // catch (error) {
+        //     console.log(error);
+        // }
+        // console.log(data)
+        axios.put('https://api.medcollapp.com/api/country/update/' + id, formData,
+            {
+                headers: { "Authorization": `Bearer ${token}` }
+            }
+        )
+            .then(res => {
+                console.log(res?.data?.data)
+                alert(res.data.message);
+                window.location.reload();
+                return JSON.stringify(res.data.data);
+            }).catch((error) => {
+                console.log(error)
+            });
     }
     useEffect(() => {
 
@@ -134,21 +152,21 @@ const EditCountry = ({ show, data, handleclose }) => {
                             <Grid item xs={12} sm={6}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="vectorIcon" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
+                                        <TextField className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" id="UCvectorIcon" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>
                             <Grid item xs={12} sm={6} style={{ borderRight: '1px solid #F0F0F0' }}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                        <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="UCphotos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <center>
                                     <div style={{ paddingTop: 10 }}>
-                                        <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                                        <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="UCbannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
                                     </div>
                                 </center>
                             </Grid>

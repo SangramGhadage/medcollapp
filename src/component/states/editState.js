@@ -11,9 +11,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditState  ({ show, data, handleclose }) {
-   
-    const initialValues = { stateName: data? data.name: '', StateShortName:data? data.state_shortname: '', languageCode: data? data.language_code: '', vectorIcone: [] , photos: [], bannerImage: [], tags: data? data.tags: '' }
+export default function EditState({ show, data, handleclose }) {
+
+    const initialValues = { stateName: data ? data.name : '', StateShortName: data ? data.state_shortname : '', languageCode: data ? data.language_code : '', vectorIcone: [], photos: [], bannerImage: [], tags: data ? data.tags : '' }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
@@ -43,20 +43,19 @@ export default function EditState  ({ show, data, handleclose }) {
         formData.append('banner_image', bannerImage.files[0]);
         formData.append('photos[]', photos.files[0]);
         formData.append('vactor_icon', vectorIcon.files[0]);
-        try {
-            const updateState = await axios.post('https://api.medcollapp.com/api/states/update/'+ id,
-                formData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            return JSON.stringify(updateState?.data);
-
-        } catch (error) {
-            alert(error.response.data.message);
-        }
+        axios.put('https://api.medcollapp.com/api/states/update/' + id, formData,
+            {
+                headers: { "Authorization": `Bearer ${token}` }
+            }
+        )
+            .then(res => {
+                
+                alert(res.data.message);
+                window.location.reload();
+                return JSON.stringify(res.data.data);
+            }).catch((error) => {
+                console.log(error)
+            });
     }
 
     return (
@@ -69,7 +68,7 @@ export default function EditState  ({ show, data, handleclose }) {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                    <Stack spacing={2} direction='row' justifyContent='space-between'>
+                        <Stack spacing={2} direction='row' justifyContent='space-between'>
                             <TextField value={formValues.stateName} name="stateName" className={classes.textField} id="outlined-basic" type='text' label="State Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.StateShortName} name="StateShortName" className={classes.textField} id="outlined-basic" type='text' label="State Short Name" variant="outlined" size="small" onChange={handleChange} />
@@ -78,7 +77,7 @@ export default function EditState  ({ show, data, handleclose }) {
 
                             <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
                         </Stack>
-                        <Stack spacing={2} direction='row' justifyContent='space-between' sx={{mt: '10px'}}>
+                        <Stack spacing={2} direction='row' justifyContent='space-between' sx={{ mt: '10px' }}>
 
                             <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
 
@@ -91,12 +90,12 @@ export default function EditState  ({ show, data, handleclose }) {
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
                                     Cancel
-                                    </Button>
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Button onClick={handleEdit} className={classes.btn} style={{ float: 'left', marginLeft: 20 }}>
                                     Update
-                                    </Button>
+                                </Button>
                             </Grid>
 
                         </Grid>

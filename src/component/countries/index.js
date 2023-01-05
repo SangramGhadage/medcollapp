@@ -11,7 +11,8 @@ import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
 import Navbar from '../sideBar/main'
 import EditCountry from './editCountry'
-import DeleteCountry from './deleteCountry'
+import DeleteCountry from './deleteCountry';
+import AddCounty from './addCounty';
 
 const drawerWidth = 260;
 
@@ -22,6 +23,7 @@ export default function Country() {
     const [allCountries, setAllCountries] = useState([]);
     const [openeditmodal, setOpenEditmodal] = React.useState(false);
     const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
+    const [openAddCountrymodal, setOpenAddCountrymodal] = React.useState(false);
     const [country, setCountry] = useState('');
     const [vectorIcone, setVectorIcon] = useState('')
 
@@ -67,7 +69,7 @@ export default function Country() {
     var columns = [
         {
             field: 'country_code',
-            headerName: 'Country Code',
+            headerName: 'Code',
             width: 100,
             editable: true,
         },
@@ -110,39 +112,7 @@ export default function Country() {
 
     // fuctionality on Submit button to add country
 
-    const handleSubmit = async () => {
-        var token = window.localStorage.getItem('token');
-        const vectorIcon = document.querySelector("#vectorIcon");
-        const bannerImage = document.querySelector("#bannerImage");
-        const photos = document.querySelector("#photos");
-
-        var formData = new FormData();
-        formData.append('banner_image', bannerImage.files[0]);
-        formData.append('country_code', formValues.countryCode);
-        formData.append('currency_code', formValues.currencyCode);
-        formData.append('currency_name', formValues.currencyName);
-        formData.append('currency_symbol', formValues.currencySymbol);
-        formData.append('language_code', formValues.languageCode);
-        formData.append('name', formValues.countryName);
-        formData.append('photos', photos.files[0]);
-        formData.append('tags', formValues.tags);
-        formData.append('vactor_icon', vectorIcon.files[0]);
-
-        try {
-            const addcountry = await axios.post(
-                'https://api.medcollapp.com/api/country/add',
-                formData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            return JSON.stringify(addcountry?.data);
-        } catch (error) {
-            alert(error.response.data.message);
-        }
-    };
+    
 
 
     //Api call to show all countries in table
@@ -203,7 +173,7 @@ export default function Country() {
                                 color: '#000000',
 
                             }}>
-                            Add Country
+                            Country
                         </Typography>
                     </Grid>
                     <Grid item xs={6} >
@@ -213,16 +183,16 @@ export default function Country() {
                         <Button
                             size="small"
                             style={{ marginLeft: 10, }}
-                        // onClick={() => {
-                        //     setOpenDeletemodal(true)
-                        // }}
+                        onClick={() => {
+                            setOpenAddCountrymodal(true)
+                        }}
                         >
                             <Tooltip title="Add New Country" placement="top-start">
                                 <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#087a9c' }} />
                             </Tooltip>
                         </Button>
                     </Grid>
-                    <Grid container direction='row'>
+                    {/* <Grid container direction='row'>
                         <Grid item xs={2}>
                             <div>
                                 <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
@@ -263,14 +233,12 @@ export default function Country() {
                                 <TextField style={{ marginTop: '10px' }} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
                             </div>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button className={classes.btn} onClick={() => handleSubmit(formValues)}>Submit</Button>
-                    </Grid>
+                    </Grid> */}
+                
                     <Grid item xs={12} >
                         <DataGrid
                             // getRowHeight={() => 'auto'}
-                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
+                            style={{ height: 550, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
                             rows={allCountries}
                             rowHeight={100}
                             columns={columns}
@@ -285,6 +253,8 @@ export default function Country() {
                     {openeditmodal ? <EditCountry show={openeditmodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
 
                     {openDeletemodal ? <DeleteCountry show={openDeletemodal} data={country} handleclose={() => setOpenDeletemodal(false)} /> : null}
+
+                    {openAddCountrymodal ? <AddCounty show={openAddCountrymodal}handleclose={() => setOpenAddCountrymodal(false)} /> : null}
 
                 </Grid> {/* main grid */}
 

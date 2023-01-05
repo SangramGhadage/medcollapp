@@ -254,12 +254,6 @@ export default function SideBar() {
                             </Menu>
                         </div>
                     )}
-                    <div style={{ marginRight: 10 }}>
-                        <center>
-                            <p style={{ color: '#fff', backgroundColor: 'red', position: 'absolute', top: 0, marginLeft: 14, marginTop: 5, border: '1px solid red', borderRadius: 50, width: '20px', fontSize: 12, fontWeight: 600, fontFamily: 'Poppins' }}>0 </p>
-                        </center>
-                        <NotificationsNoneIcon style={{ color: '#2C7FB2', cursor: 'pointer' }} />
-                    </div>
 
                 </Toolbar>
             </AppBar>
