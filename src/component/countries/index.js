@@ -7,6 +7,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
 import Navbar from '../sideBar/main'
 import EditCountry from './editCountry'
@@ -65,15 +66,15 @@ export default function Country() {
 
     var columns = [
         {
-            field: 'name',
-            headerName: 'Country',
-            width: 180,
+            field: 'country_code',
+            headerName: 'Country Code',
+            width: 100,
             editable: true,
         },
 
         {
-            field: 'country_code',
-            headerName: 'Country Code',
+            field: 'name',
+            headerName: 'Country Name',
             width: 180,
             editable: true,
         },
@@ -84,15 +85,23 @@ export default function Country() {
             editable: true,
         },
         {
-            field: 'currency_name',
-            headerName: 'Currency Name',
-            width: 180,
+            field: 'vactor_icon',
+            headerName: 'Vector Icon',
+            width: 120,
             editable: true,
+            renderCell: (params) => <img src={params.value} style={{ width: '100%' }} />,
+        },
+        {
+            field: 'banner_image',
+            headerName: 'Banner Image',
+            width: 150,
+            editable: true,
+            renderCell: (params) => <img src={params.value} style={{ width: '100%', height: '100%' }} />,
         },
         {
             field: 'Delete/Edit',
             headerName: 'Delete/Edit',
-            width: 180,
+            width: 150,
             renderCell: renderDetailsButton,
             disableClickEventBubbling: true,
         },
@@ -147,7 +156,7 @@ export default function Country() {
                         "Authorization": `Bearer ${token}`
                     }
                 });
-                // window.location.reload()
+            // window.location.reload()
             setAllCountries(response?.data?.data)
         }
         catch (error) {
@@ -174,7 +183,8 @@ export default function Country() {
                     className={clsx(classes.grid, {
                         [classes.gridShift]: open,
                     })}
-                    direction="row" style={{backgroundColor: '#f0ffffd9',
+                    direction="row" style={{
+                        backgroundColor: '#f0ffffd9',
                         border: '2px solid dodgerblue',
                         boxShadow: '10px 10px 3px 6px #fff4',
                         /* width: 100%; */
@@ -198,6 +208,19 @@ export default function Country() {
                     </Grid>
                     <Grid item xs={6} >
                         <Button className={classes.btn} onClick={() => handleStatePage()}>States</Button>
+                    </Grid>
+                    <Grid item xs={12} style={{textAlign: 'end'}}>
+                        <Button
+                            size="small"
+                            style={{ marginLeft: 10, }}
+                        // onClick={() => {
+                        //     setOpenDeletemodal(true)
+                        // }}
+                        >
+                            <Tooltip title="Add New Country" placement="top-start">
+                                <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#087a9c' }} />
+                            </Tooltip>
+                        </Button>
                     </Grid>
                     <Grid container direction='row'>
                         <Grid item xs={2}>
@@ -246,9 +269,10 @@ export default function Country() {
                     </Grid>
                     <Grid item xs={12} >
                         <DataGrid
+                            // getRowHeight={() => 'auto'}
                             style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
                             rows={allCountries}
-                            rowHeight={40}
+                            rowHeight={100}
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
@@ -274,6 +298,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
+
     },
     grid: {
         overflow: 'hidden',
