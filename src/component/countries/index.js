@@ -110,11 +110,6 @@ export default function Country() {
 
     ];
 
-    // fuctionality on Submit button to add country
-
-    
-
-
     //Api call to show all countries in table
     const countries = async () => {
         var token = window.localStorage.getItem("token");
@@ -126,7 +121,6 @@ export default function Country() {
                         "Authorization": `Bearer ${token}`
                     }
                 });
-            // window.location.reload()
             setAllCountries(response?.data?.data)
         }
         catch (error) {
@@ -176,10 +170,7 @@ export default function Country() {
                             Country
                         </Typography>
                     </Grid>
-                    <Grid item xs={6} >
-                        <Button className={classes.btn} onClick={() => handleStatePage()}>States</Button>
-                    </Grid>
-                    <Grid item xs={12} style={{textAlign: 'end'}}>
+                    <Grid item xs={6} style={{textAlign: 'end'}}>
                         <Button
                             size="small"
                             style={{ marginLeft: 10, }}
@@ -188,63 +179,21 @@ export default function Country() {
                         }}
                         >
                             <Tooltip title="Add New Country" placement="top-start">
-                                <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#087a9c' }} />
+                                <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
                             </Tooltip>
                         </Button>
-                    </Grid>
-                    {/* <Grid container direction='row'>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                            <div style={{ marginTop: '10px' }}>
-                                <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                            <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                            <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="currency Code" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                            <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <TextField value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                            <div>
-                                <TextField style={{ marginTop: '10px' }} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
-                            </div>
-                        </Grid>
-                    </Grid> */}
-                
+                    </Grid>     
                     <Grid item xs={12} >
                         <DataGrid
                             // getRowHeight={() => 'auto'}
-                            style={{ height: 550, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
+                            style={{ height: 550, fontSize: 12, backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
                             rows={allCountries}
                             rowHeight={100}
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
                             columnWidth={5}
+                            headerHeight={100}
                             onRowClick={(newSelection) => {
                                 handleCellClick(newSelection.row);
                             }}

@@ -3,3 +3,11 @@ body{
   background-image: url(assests/login_bg.jpeg);
   font-family: "Poppins", Helvetica, sans-serif;
 }
+.MuiTypography-body1 {
+  text-shadow: 2px 1px 2px black;
+}
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
+  color: #212529;
+  font-size: 14px;
+
+}

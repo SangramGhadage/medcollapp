@@ -164,7 +164,7 @@ export default function States() {
                     </Grid>
                     <Grid item xs={12} >
                         <DataGrid
-                            style={{ height: 350, fontSize: 13, fontFamily: 'Poppins', fontWeight: 700, color: '#2C7FB2', marginTop: 20, marginRight: 20 }}
+                            style={{ height: 350, fontSize: 13, fontWeight: 700,marginTop: 20, marginRight: 20 }}
                             rows={allStates}
                             rowHeight={40}
                             columns={columns}

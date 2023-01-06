@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate();
 export const menu = [
   {
-    icon: <DashboardIcon />,
+    icon: <DashboardIcon style={{textShadow: '2px 1px 2px black'}}/>,
     title: "Dashboard",
     items: [],
     path: '/'
@@ -34,7 +34,13 @@ export const menu = [
       {
         title: "- Countries",
         items: [],
-        path: '/Country'      },
+        path: '/Country'      
+      },
+      {
+        title: "- States",
+        items: [],
+        path: '/States'      
+      },
       {
         title: "- Tourism Attraction",
         items: [],

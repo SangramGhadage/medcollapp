@@ -129,6 +129,7 @@ const useStyles = makeStyles(() => ({
         // height: '200px',
         // border: '2px solid red',
         textAlign: 'center',
+        background: '#fff4',
         borderRadius: '10px',
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
         marginRight: '3%'

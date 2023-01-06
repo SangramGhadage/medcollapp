@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+
     },
     menuButton: {
         marginRight: 36,
@@ -49,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
-        fontFamily: '"Poppins", san-serif;',
-        fontStyle: 'normal',
         fontWeight: 400,
     },
     drawerOpen: {
@@ -181,7 +180,7 @@ export default function SideBar() {
                 style={{ backgroundColor: 'transparent', boxShadow: 'none' }}
             >
                 <Toolbar>
-                    <IconButton
+                    {/* <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
@@ -208,9 +207,8 @@ export default function SideBar() {
                         open={open1}
                         onClose={handleClose}
                     >
-                    </Menu>
+                    </Menu> */}
                     <div className={classes.appName}>
-                        {/* <h1 style={{ fontSize: '1.5rem' }}>medcollapp</h1> */}
                         <img src={logoPng} alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
                     </div>
                     <div className={classes.drname}>
@@ -218,36 +216,6 @@ export default function SideBar() {
                     </div>
                     {auth && (
                         <div className={classes.profile}>
-                            {/* <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="primary"
-
-                            >
-                                <Avatar style={{ borderRadius: 50, height: 40, width: 40 }} />
-                            </IconButton> */}
-
-
-                            {/* <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElProfile}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={anchorElProfile}
-                                onClick={() => setAnchorElProfile(false)}
-                            >
-                                <MenuItem>Profile</MenuItem>
-                                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-                            </Menu> */}
                             <LogoutIcon onClick={handleLogOut} style={{backgroundColor: '#dc3545', color: '#fff', fontSize: '44px', padding: '12px', borderRadius: '4px', marginLeft: '-74%', cursor: 'pointer'}}/>
                         </div>
                     )}
@@ -274,14 +242,7 @@ export default function SideBar() {
                 </div>
                 <Divider />
                 <List onMouseOver={handleDrawerOpen}>
-                    {/* {menuItems.map(({ text, icon: Icon, onClick, items }, index) => (
-                        <ListItem button key={text} onClick={onClick}>
-                            <ListItemIcon style={{ color: '#fff' }}>
-                                <Icon />
-                            </ListItemIcon>+
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))} */}
+                   
                     <Navbar/>
                 </List>
 
