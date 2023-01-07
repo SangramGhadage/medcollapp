@@ -70,7 +70,7 @@ export default function Country() {
         {
             field: 'country_code',
             headerName: 'Code',
-            width: 100,
+            width: 120,
             editable: true,
         },
 

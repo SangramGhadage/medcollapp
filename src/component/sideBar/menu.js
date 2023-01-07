@@ -25,12 +25,13 @@ export const menu = [
       {
         title: "- Diseases",
         items: [ ],
-        path: '/'
+        path: '/Disease'
       },
       {
         title: "- Hospitals",
         items: [],
-        path: '/'      },
+        path: '/Hospital'      
+      },
       {
         title: "- Countries",
         items: [],

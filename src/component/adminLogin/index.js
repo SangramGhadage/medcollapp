@@ -55,7 +55,7 @@ export default function Login() {
                 if(data.message == "Login Successfully"){
                     window.localStorage.setItem("user", JSON.stringify(data.data.user))
                     window.localStorage.setItem("token", data.data.token)
-                    navigate('/sideBar')
+                    navigate('/Dashboard')
                 }else{
                     alert(data.message)
                 }
