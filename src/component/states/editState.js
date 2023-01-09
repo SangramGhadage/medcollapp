@@ -43,7 +43,7 @@ export default function EditState({ show, data, handleclose }) {
         formData.append('banner_image', bannerImage.files[0]);
         formData.append('photos[]', photos.files[0]);
         formData.append('vactor_icon', vectorIcon.files[0]);
-        axios.put('https://api.medcollapp.com/api/states/update/' + id, formData,
+        axios.post('https://api.medcollapp.com/api/states/update/' + id, formData,
             {
                 headers: { "Authorization": `Bearer ${token}` }
             }

@@ -47,6 +47,8 @@ export default function AddCounty({ show, handleclose }) {
                     },
                 }
             );
+            alert('Contry Added')
+            window.reload()
             return JSON.stringify(addcountry?.data);
         } catch (error) {
             alert(error.response.data.message);
