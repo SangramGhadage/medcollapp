@@ -45,7 +45,7 @@ export default function AddDisease({ show, handleclose, data }) {
                 }
             );
             alert('Disease Added')
-            window.reload()
+            window.location.reload()
             return JSON.stringify(addcountry?.data);
         } catch (error) {
             alert(error.response.data.message);
@@ -82,9 +82,9 @@ export default function AddDisease({ show, handleclose, data }) {
                             <TextField sx={{ width: '400px' }} name= 'diseaseDiscription'value= {formValues.diseaseDiscription} onChange={handleChange}  id="outlined-basic" type='text' label="Disease Discription" variant="outlined" size="small" />
                         </Stack>
                         <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'iconImage'value= {formValues.iconImage} onChange={handleChange}  className={classes.textField}id="icon_image" type='file' label="Icon Image" variant="outlined" size="small" />
+                            <TextField sx={{ width: '400px' }} name= 'iconImage'value= {formValues.iconImage} onChange={handleChange}  className={classes.textField}id="icon_image" type='file' label="Icon Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
 
-                            <TextField  sx={{ width: '400px' }} name= 'slideImage'value= {formValues.slideImage} onChange={handleChange} id="slide_images" type='file' label="Slide Image" variant="outlined" size="small" />
+                            <TextField  sx={{ width: '400px' }} name= 'slideImage'value= {formValues.slideImage} onChange={handleChange} id="slide_images" type='file' label="Slide Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
                         </Stack>
                         <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
 

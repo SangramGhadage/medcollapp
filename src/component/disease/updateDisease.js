@@ -20,8 +20,8 @@ export default function UpdateDisease({ show, handleclose, disease }) {
 
     const handleSubmit = async () => {
         var token = window.localStorage.getItem('token');
-        const icon_image = document.querySelector("#icon_image");
-        const slide_images = document.querySelector("#slide_images");
+        const icon_image = document.querySelector("#uicon_image");
+        const slide_images = document.querySelector("#uslide_images");
         const id = disease.id
 
         var formData = new FormData();
@@ -30,8 +30,13 @@ export default function UpdateDisease({ show, handleclose, disease }) {
         formData.append('cause', formValues.diseaseCause);
         formData.append('result', formValues.diseaseResult);
         formData.append('treatment', formValues.diseaseTreatment);
-        formData.append('icon_image', icon_image.files[0]);
-        formData.append('slide_images[]', slide_images.files[0]);
+        if('icon_image' ==  'undefined'){
+
+          formData.append('icon_image', icon_image.files[0]);
+        }
+        if('icon_image' ==  'undefined'){
+          formData.append('slide_images[]', slide_images.files[0]);
+        }
         formData.append('tags', formValues.tags);
         formData.append('description', formValues.diseaseDiscription);
 
@@ -83,9 +88,9 @@ export default function UpdateDisease({ show, handleclose, disease }) {
                             <TextField sx={{ width: '400px' }} name= 'diseaseDiscription'value= {formValues.diseaseDiscription} onChange={handleChange}  id="outlined-basic" type='text' label="Disease Discription" variant="outlined" size="small" />
                         </Stack>
                         <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'iconImage'value= {formValues.iconImage} onChange={handleChange}  className={classes.textField}id="icon_image" type='file' label="Icon Image" variant="outlined" size="small" />
+                            <TextField sx={{ width: '400px' }} name= 'iconImage'value= {formValues.iconImage} onChange={handleChange}  className={classes.textField}id="uicon_image" type='file' label="Icon Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }}/>
 
-                            <TextField  sx={{ width: '400px' }} name= 'slideImage'value= {formValues.slideImage} onChange={handleChange} id="slide_images" type='file' label="Slide Image" variant="outlined" size="small" />
+                            <TextField  sx={{ width: '400px' }} name= 'slideImage'value= {formValues.slideImage} onChange={handleChange} id="uslide_images" type='file' label="Slide Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }}/>
                         </Stack>
                         <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
 
