@@ -70,7 +70,6 @@ export default function Login() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    // let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     return (
 
         <div className={classes.root}>
@@ -82,7 +81,6 @@ export default function Login() {
                             <h1 style={{ fontSize: '1.5rem' }}>Login Here</h1>
                         </Grid>
                         <Grid item xs={12}>
-                            {/* <input type="hidden" name="_token" value={token}></input> */}
                             <TextField className={classes.textField} id="email" type='email' label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
@@ -119,15 +117,12 @@ const useStyles = makeStyles(() => ({
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent:
-            'center',
+        justifyContent:'center',
         alignItems: 'flex-end',
     },
     loginBox: {
         maxWidth: '100%',
-        width: `calc(100vw - 70vw)`,
-        // height: '200px',
-        // border: '2px solid red',
+        width: '470px',
         textAlign: 'center',
         background: '#fff4',
         borderRadius: '10px',

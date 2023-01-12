@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
+import { Box, Stack } from '@mui/material';
 import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -143,10 +144,11 @@ export default function States() {
                     border: '2px solid dodgerblue',
                     boxShadow: '10px 10px 3px 6px #fff4',
                     /* width: 100%; */
-                    margin: '5% 3% 2% 3%',
+                    margin: '79px 3% 2% 248px',
                     padding: '2%',
                     borderRadius: '0 15px',}}
                 >
+                    <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
                     <Grid item xs={12}>
                         {/* <h1>hello</h1> */}
                     </Grid>
@@ -176,6 +178,7 @@ export default function States() {
                             }}
                         />
                     </Grid>
+                    </Box>
                     {openDeletemodal ? <DeleteState show={openDeletemodal} data={state} handleclose={() => setOpenDeletemodal(false)} /> : null}
 
                     {openEditmodal ? <EditState show={openEditmodal} data={state} handleclose={() => setOpenEditmodal(false)} /> : null}

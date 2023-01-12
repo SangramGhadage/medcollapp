@@ -65,7 +65,7 @@ export default function Disease() {
             border: '2px solid dodgerblue',
             boxShadow: '10px 10px 3px 6px #fff4',
             /* width: 100%; */
-            margin: '5% 3% 2% 3%',
+            margin: '79px 3% 2% 248px',
             padding: '2%',
             borderRadius: '0 15px',
           }}

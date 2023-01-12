@@ -179,7 +179,7 @@ export default function SideBar() {
                 })}
                 style={{ backgroundColor: 'transparent', boxShadow: 'none' }}
             >
-                <Toolbar>
+                <Toolbar style={{justifyContent:'end'}}>
                     {/* <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -208,12 +208,9 @@ export default function SideBar() {
                         onClose={handleClose}
                     >
                     </Menu> */}
-                    <div className={classes.appName}>
+                    {/* <div className={classes.appName}>
                         <img src={logoPng} alt="logo" className={classes.logo} height='40px' style={{ flex: 1 }} />
-                    </div>
-                    <div className={classes.drname}>
-
-                    </div>
+                    </div> */}
                     {auth && (
                         <div className={classes.profile}>
                             <LogoutIcon onClick={handleLogOut} style={{backgroundColor: '#dc3545', color: '#fff', fontSize: '44px', padding: '12px', borderRadius: '4px', marginLeft: '-74%', cursor: 'pointer'}}/>
@@ -222,31 +219,33 @@ export default function SideBar() {
 
                 </Toolbar>
             </AppBar>
-            <Drawer
+            <div style={{position: 'fixed'}}
                 variant="permanent"
-                className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                })}
-                classes={{
-                    paper: clsx({
-                        [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open,
-                    }),
-                }}
+                // className={clsx(classes.drawer, {
+                //     [classes.drawerOpen]: open,
+                //     [classes.drawerClose]: !open,
+                // })}
+                // classes={{
+                //     paper: clsx({
+                //         [classes.drawerOpen]: open,
+                //         [classes.drawerClose]: !open,
+                //     }),
+                // }}
             >
-                <div className={classes.toolbar} style={{ color: '#fff' }}>
+                <div  style={{ color: '#fff' }}>
                     <IconButton onClick={handleDrawerClose} style={{ color: '#fff' }}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <CloseIcon />}
+                        {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <CloseIcon />} */}
+                        <img src={logoPng} alt="logo" className={classes.logo} height='50px' style={{ flex: 1 }} />
                     </IconButton>
                 </div>
-                <Divider />
-                <List onMouseOver={handleDrawerOpen}>
+                
+                {/* <Divider /> */}
+                <List style={{width: '250px'}} onMouseOver={handleDrawerOpen}>
                    
                     <Navbar/>
                 </List>
 
-            </Drawer>
+            </div>
         </div>
     );
 }

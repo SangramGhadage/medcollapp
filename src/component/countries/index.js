@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
+import { Box, Stack } from '@mui/material';
 import { DataGrid } from '@material-ui/data-grid';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,7 +26,6 @@ export default function Country() {
     const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
     const [openAddCountrymodal, setOpenAddCountrymodal] = React.useState(false);
     const [country, setCountry] = useState('');
-    const [vectorIcone, setVectorIcon] = useState('')
 
     const navigate = useNavigate();
     const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcone: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
@@ -34,8 +34,6 @@ export default function Country() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        const file = e.target.files;
-        setVectorIcon(file)
     }
     const renderDetailsButton = (params) => {
         return (
@@ -71,34 +69,29 @@ export default function Country() {
             field: 'country_code',
             headerName: 'Code',
             width: 120,
-            editable: true,
         },
 
         {
             field: 'name',
             headerName: 'Country Name',
-            width: 180,
-            editable: true,
+            width: 170,
         },
         {
             field: 'currency_code',
             headerName: 'Currency Code',
             width: 180,
-            editable: true,
         },
         {
             field: 'vactor_icon',
             headerName: 'Vector Icon',
-            width: 120,
-            editable: true,
+            width: 160,
             renderCell: (params) => <img src={params.value} style={{ width: '100%' }} />,
         },
         {
             field: 'banner_image',
             headerName: 'Banner Image',
-            width: 150,
-            editable: true,
-            renderCell: (params) => <img src={params.value} style={{ width: '100%', height: '100%' }} />,
+            width: 200,
+            renderCell: (params) => <img src={params.value} style={{ width: '290px' }} />,
         },
         {
             field: 'Delete/Edit',
@@ -152,58 +145,48 @@ export default function Country() {
                         border: '2px solid dodgerblue',
                         boxShadow: '10px 10px 3px 6px #fff4',
                         /* width: 100%; */
-                        margin: '5% 3% 2% 3%',
+                        margin: '79px 3% 2% 248px',
                         padding: '2%',
                         borderRadius: '0 15px',
                     }}
                 >
-                    <Grid item xs={6} >
-                        <Typography variant="h5" noWrap={true}
-                            style={{
-                                fontFamily: 'Poppins',
-                                fontStyle: 'normal',
-                                fontWeight: 500,
-                                textOverflow: 'ellipsis',
-                                color: '#000000',
-
-                            }}>
-                            Country
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6} style={{textAlign: 'end'}}>
-                        <Button
-                            size="small"
-                            style={{ marginLeft: 10, }}
-                        onClick={() => {
-                            setOpenAddCountrymodal(true)
-                        }}
-                        >
-                            <Tooltip title="Add New Country" placement="top-start">
-                                <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
-                            </Tooltip>
-                        </Button>
-                    </Grid>     
-                    <Grid item xs={12} >
-                        <DataGrid
-                            // getRowHeight={() => 'auto'}
-                            style={{ height: 550, fontSize: 12, backgroundColor: '#f0ffffd9', marginTop: 20, marginRight: 20 }}
-                            rows={allCountries}
-                            rowHeight={100}
-                            columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            columnWidth={5}
-                            headerHeight={100}
-                            onRowClick={(newSelection) => {
-                                handleCellClick(newSelection.row);
-                            }}
-                        />
-                    </Grid>
+                    <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
+                       
+                        <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
+                            <Typography variant='h5'>Country</Typography>
+                            <Button
+                                size="small"
+                                style={{ marginLeft: 10, }}
+                                onClick={() => {
+                                    setOpenAddCountrymodal(true)
+                                }}
+                            >
+                                <Tooltip title="Add New Country" placement="top-start">
+                                    <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                                </Tooltip>
+                            </Button>
+                        </Stack>
+                        <Grid item xs={12} >
+                            <DataGrid
+                                style={{ height: '500px', fontSize: 12, marginTop: 20,marginBottom: 20 }}
+                                rows={allCountries}
+                                rowHeight={150}
+                                columns={columns}
+                                pageSize={5}
+                                rowsPerPageOptions={[5]}
+                                columnWidth={5}
+                                headerHeight={100}
+                                onRowClick={(newSelection) => {
+                                    handleCellClick(newSelection.row);
+                                }}
+                            />
+                        </Grid>
+                    </Box>
                     {openeditmodal ? <EditCountry show={openeditmodal} data={country} handleclose={() => setOpenEditmodal(false)} /> : null}
 
                     {openDeletemodal ? <DeleteCountry show={openDeletemodal} data={country} handleclose={() => setOpenDeletemodal(false)} /> : null}
 
-                    {openAddCountrymodal ? <AddCounty show={openAddCountrymodal}handleclose={() => setOpenAddCountrymodal(false)} /> : null}
+                    {openAddCountrymodal ? <AddCounty show={openAddCountrymodal} handleclose={() => setOpenAddCountrymodal(false)} /> : null}
 
                 </Grid> {/* main grid */}
 
@@ -219,20 +202,20 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
 
     },
-    grid: {
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
-        margin: '70px 0 20px 25px'
-    },
-    gridShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
+    // grid: {
+    //     overflow: 'hidden',
+    //     whiteSpace: 'nowrap',
+    //     textOverflow: 'ellipsis',
+    //     // margin: '70px 0 20px 25px'
+    // },
+    // gridShift: {
+    //     marginLeft: drawerWidth,
+    //     width: `calc(100% - ${drawerWidth}px)`,
+    //     transition: theme.transitions.create(['width',], {
+    //         easing: theme.transitions.easing.sharp,
+    //         duration: theme.transitions.duration.enteringScreen,
+    //     }),
+    // },
     textField: {
         fontFamily: 'Poppins;',
         fontStyle: 'normal',

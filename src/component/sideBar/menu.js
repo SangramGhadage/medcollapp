@@ -13,10 +13,10 @@ import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate();
 export const menu = [
   {
-    icon: <DashboardIcon style={{textShadow: '2px 1px 2px black'}}/>,
+    icon: <DashboardIcon style={{textShadow: '2px 1px 2px black !important'}}/>,
     title: "Dashboard",
     items: [],
-    path: '/'
+    path: '/Dashboard'
   },
   {
     icon: <AddchartIcon/>,

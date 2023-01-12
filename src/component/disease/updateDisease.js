@@ -10,13 +10,14 @@ export default function UpdateDisease({ show, handleclose, disease }) {
     const [maxWidth, setMaxWidth] = React.useState('md');
     const [country, setCountry] = useState('');
 
-    const initialValues = { diseaseName: disease?disease.name:'', diseaseCatagory: disease.category, diseaseCause: disease.cause, diseaseTreatment: disease.treatment, diseaseResult: disease.result, iconImage: [], slideImage: [], tags: disease.tags, diseaseDiscription: disease.description }
+    const initialValues = { diseaseName: disease?disease.name:'', diseaseCatagory: disease.category, diseaseCause: disease.cause, diseaseTreatment: disease.treatment, diseaseResult: disease.result, iconImage: '', slideImage: '', tags: disease.tags, diseaseDiscription: disease.description }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
     }
+    console.log(formValues)
 
     const handleSubmit = async () => {
         var token = window.localStorage.getItem('token');
@@ -30,11 +31,11 @@ export default function UpdateDisease({ show, handleclose, disease }) {
         formData.append('cause', formValues.diseaseCause);
         formData.append('result', formValues.diseaseResult);
         formData.append('treatment', formValues.diseaseTreatment);
-        if('icon_image' ==  'undefined'){
+        if(formValues.iconImage !== ''){
 
-          formData.append('icon_image', icon_image.files[0]);
+            formData.append('icon_image', icon_image.files[0]);
         }
-        if('icon_image' ==  'undefined'){
+        if(formValues.slideImage  !==  ''){
           formData.append('slide_images[]', slide_images.files[0]);
         }
         formData.append('tags', formValues.tags);

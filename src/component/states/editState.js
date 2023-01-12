@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function EditState({ show, data, handleclose }) {
 
-    const initialValues = { stateName: data ? data.name : '', StateShortName: data ? data.state_shortname : '', languageCode: data ? data.language_code : '', vectorIcone: [], photos: [], bannerImage: [], tags: data ? data.tags : '' }
+    const initialValues = { stateName: data ? data.name : '', StateShortName: data ? data.state_shortname : '', languageCode: data ? data.language_code : '', vectorIcone: '', photos: '', bannerImage: '', tags: data ? data.tags : '' }
     const [formValues, setFormValues] = useState(initialValues);
 
     const handleChange = (e) => {
@@ -40,9 +40,17 @@ export default function EditState({ show, data, handleclose }) {
         formData.append('state_shortname', formValues.StateShortName);
         formData.append('language_code', formValues.languageCode);
         formData.append('tags', formValues.tags);
-        formData.append('banner_image', bannerImage.files[0]);
-        formData.append('photos[]', photos.files[0]);
-        formData.append('vactor_icon', vectorIcon.files[0]);
+        if (formValues.bannerImage !== ''){
+            formData.append('banner_image', bannerImage.files[0]);
+        }
+        if (formValues.photos !== ''){
+
+            formData.append('photos[]', photos.files[0]);
+        }
+        if (formValues.vectorIcone !== ''){
+
+            formData.append('vactor_icon', vectorIcon.files[0]);
+        }
         axios.post('https://api.medcollapp.com/api/states/update/' + id, formData,
             {
                 headers: { "Authorization": `Bearer ${token}` }
