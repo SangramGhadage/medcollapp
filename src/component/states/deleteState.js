@@ -44,7 +44,7 @@ const DeleteState = ({ show, data, handleclose }) => {
                     <DialogContentText id="alert-dialog-description">
                         <Grid container>
                             <Grid item xs={12} style={{ textAlign: 'center', }}>
-                                <h4>Are yor sure you want to delete this State</h4>
+                                <h4>Are you sure you want to delete this State</h4>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>

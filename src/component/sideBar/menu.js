@@ -45,7 +45,7 @@ export const menu = [
       {
         title: "- Tourism Attraction",
         items: [],
-        path: '/#'      },
+        path: '/Dashboard'      },
     ]
   },
   {
@@ -55,33 +55,33 @@ export const menu = [
       {
         title: "- Medical Tourism Company",
         items: [ ],
-        path: '/#'
+        path: '/Dashboard'
       },
       {
         title: "- Travel Agency",
         items: [ ],
-        path: '/#'
+        path: '/'
       },
       {
         title: "- Insurance Company",
         items: [],
-        path: '/#'
+        path: '/Dashboard'
       },
       {
         title: "- Hotel Resort",
         items: [],
-        path: '/#'
+        path: '/Dashboard'
       },
       {
         title: "- Air Ambulance/Taxis",
         items: [],
-        path: '/#'
+        path: '/Dashboard'
       },
     ]
   },
   {
     icon: <ArticleIcon />,
     title: "Reports",
-    path: '/#'
+    path: '/Dashboard'
   },
 ];

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { Button, Slide, Dialog, TextField, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import { Stack } from '@mui/material';
 import axios from 'axios';
 
@@ -74,9 +75,15 @@ export default function EditState({ show, data, handleclose }) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
+                <DialogTitle id="alert-dialog-title" style={{ fontWeight: 700, fontSize: 20, color: '#000' }}>{"Edit State"}
+                    <IconButton edge="start" color="inherit" onClick={handleclose} aria-label="close" style={{ float: 'right', color: '#000', }}>
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <Stack spacing={2} direction='row' justifyContent='space-between'>
+                        <Stack direction='row' gap='20px'>
+                        <Stack spacing={2} direction='column' >
                             <TextField value={formValues.stateName} name="stateName" className={classes.textField} id="outlined-basic" type='text' label="State Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.StateShortName} name="StateShortName" className={classes.textField} id="outlined-basic" type='text' label="State Short Name" variant="outlined" size="small" onChange={handleChange} />
@@ -85,7 +92,7 @@ export default function EditState({ show, data, handleclose }) {
 
                             <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
                         </Stack>
-                        <Stack spacing={2} direction='row' justifyContent='space-between' sx={{ mt: '10px' }}>
+                        <Stack spacing={2} direction='column' sx={{ mt: '10px' }}>
 
                             <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
 
@@ -93,6 +100,7 @@ export default function EditState({ show, data, handleclose }) {
 
                             <TextField id="photos" className={classes.textField} value={formValues.photos} name="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
 
+                        </Stack>
                         </Stack>
                         <Grid container>
                             <Grid item xs={12} sm={6}>
@@ -128,14 +136,15 @@ const useStyles = makeStyles((theme) => ({
     btn: {
         backgroundColor: '#2C7FB2 !important',
         color: '#fff !important',
-        fontFamily: '"Poppins", san-serif;',
-        fontStyle: 'normal',
-        fontWeight: 400,
+        fontWeight: 700,
         textAlign: 'center',
         borderRadius: 28,
         width: 120,
         marginTop: 10,
         fontSize: '12px'
     },
+    textField: {
+        width: '300px'
+    }
 
 }));

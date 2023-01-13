@@ -3,7 +3,7 @@ import Navbar from '../sideBar/main'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Grid } from "@material-ui/core";
-import { Box } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import axios from 'axios';
 
 const drawerWidth = 260;
@@ -49,13 +49,16 @@ export default function Hospital() {
             border: '2px solid dodgerblue',
             boxShadow: '10px 10px 3px 6px #fff4',
             /* width: 100%; */
-            margin: '5% 3% 2% 3%',
+            margin: '79px 3% 2% 248px',
             padding: '2%',
             borderRadius: '0 15px',
           }}
         >
           <Box sx={{width: '100%',backgroundColor: '#fff3',boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)',borderRadius: '5px',padding: '0 30px 10px 30px'}}>
-          <h1>Hospitals</h1>
+          <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
+              <Typography variant='h5'>Hospitals</Typography>
+
+            </Stack>
           </Box>
         </Grid>
       </div>

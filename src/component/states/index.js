@@ -7,6 +7,7 @@ import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
 import DeleteState from './deleteState';
 import EditState from './editState'
@@ -40,7 +41,7 @@ export default function States() {
                         setOpenDeletemodal(true)
                     }}
                 >
-                    <Tooltip title="Delete Country" placement="top-start">
+                    <Tooltip title="Delete State" placement="top-start">
                         <DeleteIcon style={{ color: 'red' }} />
                     </Tooltip>
                 </Button>
@@ -51,7 +52,7 @@ export default function States() {
                         setOpenEditmodal(true)
                     }}
                 >
-                    <Tooltip title="Edit Country" placement="top-start">
+                    <Tooltip title="Edit State" placement="top-start">
                         <BorderColorIcon />
                     </Tooltip>
                 </Button>
@@ -125,59 +126,79 @@ export default function States() {
         console.log(row)
     }
 
-    const handleAddState = () =>{
+    const handleAddState = () => {
+        if(country === ''){
+            alert("please select Country")
+        }else{
+
             setOpenAddmodal(true)
-            console.log(country);
+        }
+        console.log(country);
     }
     useEffect(() => {
         countries();
     }, [])
     return (
         <>
-            <div className={classes.root} style={{ }}>
+            <div className={classes.root} style={{}}>
                 <Navbar />
                 <Grid container spacing={2}
                     className={clsx(classes.grid, {
                         [classes.gridShift]: open,
                     })}
-                    direction="row" style={{backgroundColor: '#f0ffffd9',
-                    border: '2px solid dodgerblue',
-                    boxShadow: '10px 10px 3px 6px #fff4',
-                    /* width: 100%; */
-                    margin: '79px 3% 2% 248px',
-                    padding: '2%',
-                    borderRadius: '0 15px',}}
+                    direction="row" style={{
+                        backgroundColor: '#f0ffffd9',
+                        border: '2px solid dodgerblue',
+                        boxShadow: '10px 10px 3px 6px #fff4',
+                        /* width: 100%; */
+                        margin: '79px 3% 2% 248px',
+                        padding: '2%',
+                        borderRadius: '0 15px',
+                    }}
                 >
-                    <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
-                    <Grid item xs={12}>
-                        {/* <h1>hello</h1> */}
-                    </Grid>
-                    <Grid item xs={3}>
-                        <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: 30, border: '1px solid #F0F0F0', fontFamily: 'Poppins', paddingLeft: 15 }}>
-                            <option value="N/A">Select</option>
-                            {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
-                        </select>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button>
-                    </Grid>
-                    <Grid item xs={12} >
-                        <DataGrid
-                            style={{ height: 350, fontSize: 13, fontWeight: 700,marginTop: 20, marginRight: 20 }}
-                            rows={allStates}
-                            rowHeight={40}
-                            columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            columnWidth={5}
-                            onRowClick={(newSelection) => {
-                                handleCellClick(newSelection.row);
-                            }}
-                        />
-                    </Grid>
+                    <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '10px 30px 10px 30px' }}>
+                        <Grid item xs={12}>
+                            {/* <h1>hello</h1> */}
+                        </Grid>
+                        <Stack direction='row' spacing={3} justifyContent= 'space-between'>
+                            <Stack direction= 'row' spacing={4}>
+                            <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: '37px', border: '1px solid #F0F0F0', paddingLeft: 15 }}>
+                                <option value="N/A">Select Country</option>
+                                {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
+                            </select>
+
+
+                            <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
+                            </Stack>
+
+                            <Stack>
+                            <Button
+                                size="small"
+                                style={{ marginLeft: 10, }}
+                                onClick={(e) => handleAddState(e)}
+                            >
+                                <Tooltip title="Add New State" placement="top-start">
+                                    <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                                </Tooltip>
+                            </Button>
+                            </Stack>
+                            {/* <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button> */}
+
+                        </Stack>
+                        <Grid item xs={12} >
+                            <DataGrid
+                                style={{ height: 350, fontSize: 13, fontWeight: 700, marginTop: 20, marginRight: 20 }}
+                                rows={allStates}
+                                rowHeight={40}
+                                columns={columns}
+                                pageSize={5}
+                                rowsPerPageOptions={[5]}
+                                columnWidth={5}
+                                onRowClick={(newSelection) => {
+                                    handleCellClick(newSelection.row);
+                                }}
+                            />
+                        </Grid>
                     </Box>
                     {openDeletemodal ? <DeleteState show={openDeletemodal} data={state} handleclose={() => setOpenDeletemodal(false)} /> : null}
 
