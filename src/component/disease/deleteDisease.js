@@ -81,14 +81,13 @@ const useStyles = makeStyles((theme) => ({
     btn: {
         backgroundColor: '#2C7FB2 !important',
         color: '#fff !important',
-        fontFamily: '"Poppins", san-serif;',
-        fontStyle: 'normal',
-        fontWeight: 400,
+        fontWeight: 700,
         textAlign: 'center',
         borderRadius: 28,
         width: 120,
         marginTop: 10,
-        fontSize: '12px'
+        fontSize: '12px',
+        textTransform: 'none !important',
     },
 
 }));

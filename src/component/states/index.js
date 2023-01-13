@@ -127,9 +127,9 @@ export default function States() {
     }
 
     const handleAddState = () => {
-        if(country === ''){
+        if (country === '') {
             alert("please select Country")
-        }else{
+        } else {
 
             setOpenAddmodal(true)
         }
@@ -157,30 +157,28 @@ export default function States() {
                     }}
                 >
                     <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '10px 30px 10px 30px' }}>
-                        <Grid item xs={12}>
-                            {/* <h1>hello</h1> */}
-                        </Grid>
-                        <Stack direction='row' spacing={3} justifyContent= 'space-between'>
-                            <Stack direction= 'row' spacing={4}>
-                            <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: '37px', border: '1px solid #F0F0F0', paddingLeft: 15 }}>
-                                <option value="N/A">Select Country</option>
-                                {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
-                            </select>
+
+                        <Stack direction='row' spacing={3} justifyContent='space-between' >
+                            <Stack direction='row' spacing={4}>
+                                <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: '37px', border: '1px solid #F0F0F0', paddingLeft: 15 }}>
+                                    <option value="N/A">Select Country</option>
+                                    {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
+                                </select>
 
 
-                            <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
+                                <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
                             </Stack>
 
                             <Stack>
-                            <Button
-                                size="small"
-                                style={{ marginLeft: 10, }}
-                                onClick={(e) => handleAddState(e)}
-                            >
-                                <Tooltip title="Add New State" placement="top-start">
-                                    <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
-                                </Tooltip>
-                            </Button>
+                                <Button
+                                    size="small"
+                                    style={{ marginLeft: 10, }}
+                                    onClick={(e) => handleAddState(e)}
+                                >
+                                    <Tooltip title="Add New State" placement="top-start">
+                                        <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                                    </Tooltip>
+                                </Button>
                             </Stack>
                             {/* <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button> */}
 
@@ -242,7 +240,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#ffffff !important",
         backgroundColor: '#407BFF !important',
         fontStyle: 'normal',
-        fontWeight: 400,
+        fontWeight: 700,
         borderRadius: 9,
+        textTransform: 'none !important',
     }
 }));

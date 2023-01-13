@@ -228,7 +228,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#ffffff !important",
         backgroundColor: '#407BFF !important',
         fontStyle: 'normal',
-        fontWeight: 400,
+        fontWeight: 700,
         borderRadius: 9,
+        textTransform: 'none !important',
     }
 }));

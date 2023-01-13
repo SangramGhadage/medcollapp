@@ -139,6 +139,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         textAlign: 'center',
         borderRadius: 28,
+        textTransform: 'none !important',
         width: 120,
         marginTop: 10,
         fontSize: '12px'

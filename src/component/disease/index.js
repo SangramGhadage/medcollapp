@@ -47,7 +47,7 @@ export default function Disease() {
     setDisease(index)
     SetOpenUpdateDiseasemodal(true)
   }
- 
+
   useEffect(() => {
     diseases();
   }, [])
@@ -71,7 +71,7 @@ export default function Disease() {
           }}
         >
           <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
-            <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', }}>
+            <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '10px' }}>
               <Typography variant='h5'>Disease</Typography>
               <Button
                 size="small"
@@ -87,16 +87,19 @@ export default function Disease() {
             </Stack>
             <Grid container direction='row' spacing={3}>
 
-            {allDiseases.map((item, index) => (
-              <Grid key={index.id} item xs={3}>
-                <img src={item.icon_image} alt="" style={{ width: '100%', objectFit: 'cover' }} />
-                <Typography variant='h5'>{item.name}</Typography>
-                <Stack direction='row' justifyContent='space-around'>
-                  <Button onClick={(e) => handleDeleteModal(e,item)}>Delete</Button>
-                  <Button onClick={(e)=> handleUpdateModal(e,item)}>Update</Button>
-                </Stack>
-              </Grid>
-            ))}
+              {allDiseases.map((item, index) => (
+                <Grid key={index.id} item xs={3}>
+                  <Box sx={{height: '400px', width: '100%'}}>
+                  <img src={item.icon_image} alt="" style={{ width: '100%',height: '40%', objectFit: 'cover' }} />
+                  <Typography variant='h5'>{item.name}</Typography>
+                  <Stack direction='row' justifyContent='space-around'>
+                    <Button sx={{backgroundColor: '#2C7FB2 !important',width: 100, color: '#fff !important',borderRadius: 28, textTransform: 'none !important',}} onClick={(e) => handleDeleteModal(e, item)}>Delete</Button>
+
+                    <Button sx={{backgroundColor: '#2C7FB2 !important',width: 100, color: '#fff !important',borderRadius: 28, textTransform: 'none !important',}} onClick={(e) => handleUpdateModal(e, item)}>Update</Button>
+                  </Stack>
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
           </Box>
 

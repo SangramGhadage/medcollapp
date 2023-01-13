@@ -161,7 +161,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 28,
         width: 120,
         marginTop: 10,
-        fontSize: '12px'
+        textTransform: 'none !important',
+        fontSize: '12px',
+        textTransform: 'none !important',
     },
     textField: {
         width: '300px',

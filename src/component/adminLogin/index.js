@@ -143,11 +143,12 @@ const useStyles = makeStyles(() => ({
         color: '#fff !important',
         fontFamily: "Poppins",
         fontStyle: 'normal',
-        fontWeight: 400,
+        fontWeight: 700,
         borderRadius: 9,
         width: '60%',
         fontSize: '1rem',
         marginBottom: 10,
-        marginTop: 10
+        marginTop: 10,
+        textTransform: 'none !important',
     }
 }));
