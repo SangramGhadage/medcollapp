@@ -24,14 +24,14 @@ export default function Dashboard() {
             border: '2px solid dodgerblue',
             boxShadow: '10px 10px 3px 6px #fff4',
             /* width: 100%; */
-            margin: '79px 3% 2% 248px',
+            margin: '71px 1% 2% 248px',
             padding: '2%',
             borderRadius: '0 15px',
           }}
         >
-          <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
+          <Box sx={{ width: '100%', height: '76vh', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
             <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
-              <Typography variant='h5'>Welcome to Dashboard</Typography>
+              <Typography variant='h4'>Welcome to DashBoard, DashBoard will be ready later</Typography>
 
             </Stack>
           </Box>

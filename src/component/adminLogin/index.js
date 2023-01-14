@@ -78,13 +78,14 @@ export default function Login() {
                 <form onSubmit={handleSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <h1 style={{ fontSize: '1.5rem' }}>Login Here</h1>
+                            <h1 style={{ fontSize: '2.5rem', margin: '0' }}>Sign In</h1>
+                            <small style={{color: '#777777', marginTop: '0', fontWeight: '700'}}>Enter your Email & Password to login</small>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="email" type='email' label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
+                            <TextField className={classes.textField} id="email" type='email' label="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} variant="standard" size="small" required />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField className={classes.textField} id="password" type={showPassword ? 'text' : 'password'} label="Password" value={password} name="password" onChange={(e) => setPassword(e.target.value)} variant="standard" size="small" required InputProps={{
+                            <TextField className={classes.textField} id="password" type={showPassword ? 'text' : 'password'} label="Enter Password" value={password} name="password" onChange={(e) => setPassword(e.target.value)} variant="standard" size="small" required InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
@@ -100,9 +101,6 @@ export default function Login() {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Button type='submit' className={classes.btn}>Submit</Button>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <small style={{ color: '#000000', fontWeight: '600', fontSize: '0.8rem' }}>Forgot Password</small>
                         </Grid>
                     </Grid>
                 </form>
@@ -122,30 +120,27 @@ const useStyles = makeStyles(() => ({
     },
     loginBox: {
         maxWidth: '100%',
-        width: '470px',
-        textAlign: 'center',
+        width: '420px',
+        textAlign: 'start',
         background: '#fff4',
-        borderRadius: '10px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-        marginRight: '3%'
+        padding: '1.8rem',
+        borderRadius: '24px',
+        boxShadow: '4px 11px 12px -2px rgb(134 128 128 / 25%)',
+        marginRight: '2%'
 
     },
     textField: {
-        fontFamily: '"Poppins", san-serif;',
         fontStyle: 'normal',
         fontWeight: 400,
         textAlign: 'center',
-        width: '80%',
+        width: '100%',
         marginBottom: '20px'
     },
     btn: {
-        backgroundColor: '#407BFF !important',
+        backgroundColor: '#004dda !important',
         color: '#fff !important',
-        fontFamily: "Poppins",
-        fontStyle: 'normal',
-        fontWeight: 700,
         borderRadius: 9,
-        width: '60%',
+        width: '44%',
         fontSize: '1rem',
         marginBottom: 10,
         marginTop: 10,

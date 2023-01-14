@@ -213,7 +213,7 @@ export default function SideBar() {
                     </div> */}
                     {auth && (
                         <div className={classes.profile}>
-                            <LogoutIcon onClick={handleLogOut} style={{backgroundColor: '#dc3545', color: '#fff', fontSize: '44px', padding: '12px', borderRadius: '4px', marginLeft: '-74%', cursor: 'pointer'}}/>
+                            <LogoutIcon onClick={handleLogOut} style={{backgroundColor: '#dc3545', color: '#fff', fontSize: '44px', padding: '12px', borderRadius: '4px', marginLeft: '0%', cursor: 'pointer'}}/>
                         </div>
                     )}
 

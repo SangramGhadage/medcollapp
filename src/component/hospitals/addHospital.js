@@ -71,7 +71,7 @@ export default function AddHospital({ show, handleclose }) {
                     },
                 }
             );
-            alert('Disease Added')
+            alert('Hospital Added')
             window.location.reload()
             return JSON.stringify(addcountry?.data);
         } catch (error) {

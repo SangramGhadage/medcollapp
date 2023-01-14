@@ -6,6 +6,7 @@ import { Grid, Tooltip } from "@material-ui/core";
 import { Box, Stack, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import DeleteHospital from './deleteHospital';
 import AddHospital from './addHospital';
@@ -20,6 +21,7 @@ export default function Hospital() {
   const [allHospitals, setAllHospitals] = useState([]);
   const [hospital, setHospital] = useState('')
   const [openDeleteHospitalmodal, SetOpenDeleteHospitalmodal] = useState(false);
+  const [openUpdateHospitalmodal, SetOpenUpdateHospitalmodal] = useState(false);
   const [openAddHospitalmodal, SetOpenAddHospitalmodal] = useState(false);
 
 
@@ -45,13 +47,12 @@ export default function Hospital() {
   }, [])
 
   const handleDeleteModal = (e, index) => {
-    console.log(index)
     setHospital(index)
     SetOpenDeleteHospitalmodal(true)
   }
   const handleUpdateModal = (e, index) => {
     setHospital(index)
-    // SetOpenUpdateDiseasemodal(true)
+    SetOpenUpdateHospitalmodal(true)
   }
 
   return (
@@ -92,8 +93,12 @@ export default function Hospital() {
               {allHospitals.map((item, index) => (
                 <Grid key={index.id} item xs={3}>
                   <Box sx={{height: '400px', width: '100%'}}>
-                  <img src={item.icon_image} alt="" style={{ width: '100%',height: '40%', objectFit: 'cover' }} />
+                  <img src={item.logo} alt="" style={{ width: '100%',height: '40%', objectFit: 'cover' }} />
                   <Typography variant='h5'>{item.name}</Typography>
+                  <Stack direction= 'row' spacing={2}>
+                    <LocationOnIcon/>
+                    <Typography variant='h6'>{item.address}</Typography>
+                  </Stack>
                   <Stack direction='row' justifyContent='space-around'>
                     <Button sx={{backgroundColor: '#2C7FB2 !important',width: 100, color: '#fff !important',borderRadius: 28, textTransform: 'none !important',}} onClick={(e) => handleDeleteModal(e, item)}>Delete</Button>
 
@@ -108,6 +113,8 @@ export default function Hospital() {
           {openAddHospitalmodal ? <AddHospital show={openAddHospitalmodal} handleclose={() => SetOpenAddHospitalmodal(false)} /> : null}
 
           {openDeleteHospitalmodal ? <DeleteHospital hospital={hospital} show={openDeleteHospitalmodal} handleclose={() => SetOpenDeleteHospitalmodal(false)} /> : null}
+          
+          {openUpdateHospitalmodal ? <UpdateHospital hospital={hospital} show={openUpdateHospitalmodal} handleclose={() => SetOpenUpdateHospitalmodal(false)} /> : null}
         </Grid>
       </div>
     </>

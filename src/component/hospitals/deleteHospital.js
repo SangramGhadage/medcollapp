@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Slide, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
 import axios from 'axios';
 
-export default function DeleteHospital({ show, data, handleclose }) {
+export default function DeleteHospital({ show, hospital, handleclose }) {
   const classes = useStyles();
+  const [maxWidth, setMaxWidth] = React.useState('md');
+
   const handleonDelete = () => {
     var token = window.localStorage.getItem("token");
-    let id = data.id
+    let id = hospital.id
     console.log(id)
     
     axios.delete('https://api.medcollapp.com/api/hospital/delete/' + id,
@@ -19,7 +21,6 @@ export default function DeleteHospital({ show, data, handleclose }) {
         }).catch((error) => {
             console.log(error.response.data.message)
         });
-    console.log(data)
 }
   return (
     <>

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
-import { Box, Stack } from '@mui/material';
-import { DataGrid } from '@material-ui/data-grid';
+import { Grid, Typography, TextField, Button,  Tooltip } from "@material-ui/core";
+import { Box, Stack, } from '@mui/material';
+import { DataGrid } from "@material-ui/data-grid";
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -38,27 +38,25 @@ export default function Country() {
     const renderDetailsButton = (params) => {
         return (
             <>
+               {/* #ffc107 */}
                 <Button
                     size="small"
-                    style={{ marginLeft: 10, }}
-                    onClick={() => {
-                        setOpenDeletemodal(true)
-                    }}
-                >
-                    <Tooltip title="Delete Country" placement="top-start">
-                        <DeleteIcon style={{ color: 'red' }} />
-                    </Tooltip>
-                </Button>
-                <Button
-                    size="small"
-                    style={{ marginLeft: 10 }}
+                    
+                    style={{ backgroundColor: '#ffc107 ', textTransform: 'none', color: '#fff', marginRight: '5px', fontWeight: '700' }}
                     onClick={() => {
                         setOpenEditmodal(true)
                     }}
                 >
-                    <Tooltip title="Edit Country" placement="top-start">
-                        <BorderColorIcon />
-                    </Tooltip>
+                    Edit
+                </Button>
+                <Button
+                    size="small"
+                    style={{ backgroundColor: '#dc3545 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}
+                    onClick={() => {
+                        setOpenDeletemodal(true)
+                    }}
+                >
+                    Delete
                 </Button>
             </>
         )
@@ -67,8 +65,8 @@ export default function Country() {
     var columns = [
         {
             field: 'country_code',
-            headerName: 'Code',
-            width: 120,
+            headerName: 'Country Code',
+            width: 140,
         },
 
         {
@@ -95,7 +93,7 @@ export default function Country() {
         },
         {
             field: 'Delete/Edit',
-            headerName: 'Delete/Edit',
+            headerName: 'Action(s)',
             width: 150,
             renderCell: renderDetailsButton,
             disableClickEventBubbling: true,
@@ -145,7 +143,7 @@ export default function Country() {
                         border: '2px solid dodgerblue',
                         boxShadow: '10px 10px 3px 6px #fff4',
                         /* width: 100%; */
-                        margin: '79px 3% 2% 248px',
+                        margin: '71px 3% 2% 248px',
                         padding: '2%',
                         borderRadius: '0 15px',
                     }}
@@ -153,7 +151,7 @@ export default function Country() {
                     <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
                        
                         <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
-                            <Typography variant='h5'>Country</Typography>
+                            <Typography variant='h5'>Country Master</Typography>
                             <Button
                                 size="small"
                                 style={{ marginLeft: 10, }}
@@ -168,7 +166,7 @@ export default function Country() {
                         </Stack>
                         <Grid item xs={12} >
                             <DataGrid
-                                style={{ height: '500px', fontSize: 12, marginTop: 20,marginBottom: 20 }}
+                            className={classes.dataGrid}
                                 rows={allCountries}
                                 rowHeight={150}
                                 columns={columns}
@@ -231,5 +229,16 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         borderRadius: 9,
         textTransform: 'none !important',
+    },
+    dataGrid: {
+        height: '930px', border: 'none', fontSize: 12, marginTop: 20,marginBottom: 20 ,
+        "& .MuiDataGrid-columnHeaderTitle": {
+            overflow: "clip",
+            lineHeight: "1",
+            whiteSpace: "break-spaces"
+          },
+          "& .MuiIconButton-sizeSmall": {
+            visibility: 'visible'
+          }
     }
 }));
