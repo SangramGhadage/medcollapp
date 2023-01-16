@@ -75,7 +75,7 @@ export default function Hospital() {
         >
           <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
             <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
-              <Typography variant='h5'>Hospitals</Typography>
+              <Typography variant='h5'>Hospitals Master</Typography>
               <Button
                 size="small"
                 style={{ marginLeft: 10, }}

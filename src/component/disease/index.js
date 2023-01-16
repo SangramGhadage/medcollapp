@@ -72,7 +72,7 @@ export default function Disease() {
         >
           <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
             <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '10px' }}>
-              <Typography variant='h5'>Disease</Typography>
+              <Typography variant='h5'>Disease Master</Typography>
               <Button
                 size="small"
                 style={{ marginLeft: 10, }}
