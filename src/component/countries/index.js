@@ -38,7 +38,7 @@ export default function Country() {
     const renderDetailsButton = (params) => {
         return (
             <>
-               {/* #ffc107 */}
+               {/* #28a745 */}
                 <Button
                     size="small"
                     
@@ -82,14 +82,21 @@ export default function Country() {
         {
             field: 'vactor_icon',
             headerName: 'Vector Icon',
-            width: 160,
+            width: 140,
             renderCell: (params) => <img src={params.value} style={{ width: '100%' }} />,
         },
         {
             field: 'banner_image',
             headerName: 'Banner Image',
-            width: 200,
+            width: 290,
             renderCell: (params) => <img src={params.value} style={{ width: '290px' }} />,
+        },
+        {
+            field: 'Status',
+            headerName: 'Status',
+            width: 130,
+            renderCell: () => <Button style={{ backgroundColor: '#28a745 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}>Active</Button>
+            // disableClickEventBubbling: true,
         },
         {
             field: 'Delete/Edit',
@@ -143,7 +150,7 @@ export default function Country() {
                         border: '2px solid dodgerblue',
                         boxShadow: '10px 10px 3px 6px #fff4',
                         /* width: 100%; */
-                        margin: '71px 3% 2% 248px',
+                        margin: '71px 1% 2% 248px',
                         padding: '2%',
                         borderRadius: '0 15px',
                     }}
@@ -200,20 +207,6 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
 
     },
-    // grid: {
-    //     overflow: 'hidden',
-    //     whiteSpace: 'nowrap',
-    //     textOverflow: 'ellipsis',
-    //     // margin: '70px 0 20px 25px'
-    // },
-    // gridShift: {
-    //     marginLeft: drawerWidth,
-    //     width: `calc(100% - ${drawerWidth}px)`,
-    //     transition: theme.transitions.create(['width',], {
-    //         easing: theme.transitions.easing.sharp,
-    //         duration: theme.transitions.duration.enteringScreen,
-    //     }),
-    // },
     textField: {
         fontFamily: 'Poppins;',
         fontStyle: 'normal',
@@ -231,14 +224,15 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none !important',
     },
     dataGrid: {
-        height: '930px', border: 'none', fontSize: 12, marginTop: 20,marginBottom: 20 ,
+        height: '930px', border: 'none', fontSize: 14, marginTop: 20,marginBottom: 20 ,
         "& .MuiDataGrid-columnHeaderTitle": {
             overflow: "clip",
             lineHeight: "1",
-            whiteSpace: "break-spaces"
+            whiteSpace: "break-spaces",
+            fontWeight: 'bold'
           },
           "& .MuiIconButton-sizeSmall": {
             visibility: 'visible'
-          }
+          },
     }
 }));

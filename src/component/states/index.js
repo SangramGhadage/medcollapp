@@ -36,25 +36,21 @@ export default function States() {
             <>
                 <Button
                     size="small"
-                    style={{ marginLeft: 10, }}
-                    onClick={() => {
-                        setOpenDeletemodal(true)
-                    }}
-                >
-                    <Tooltip title="Delete State" placement="top-start">
-                        <DeleteIcon style={{ color: 'red' }} />
-                    </Tooltip>
-                </Button>
-                <Button
-                    size="small"
-                    style={{ marginLeft: 10 }}
+                    style={{ backgroundColor: '#ffc107 ', textTransform: 'none', color: '#fff', marginRight: '5px', fontWeight: '700' }}
                     onClick={() => {
                         setOpenEditmodal(true)
                     }}
                 >
-                    <Tooltip title="Edit State" placement="top-start">
-                        <BorderColorIcon />
-                    </Tooltip>
+                    Edit
+                </Button>
+                <Button
+                    size="small"
+                    style={{ backgroundColor: '#dc3545 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}
+                    onClick={() => {
+                        setOpenDeletemodal(true)
+                    }}
+                >
+                    Delete
                 </Button>
             </>
         )
@@ -74,8 +70,27 @@ export default function States() {
             editable: true,
         },
         {
+            field: 'vactor_icon',
+            headerName: 'Vector Icon',
+            width: 140,
+            renderCell: (params) => <img src={params.value} style={{ width: '100%' }} />,
+        },
+        {
+            field: 'banner_image',
+            headerName: 'Banner Image',
+            width: 290,
+            renderCell: (params) => <img src={params.value} style={{ width: '100%' }} />,
+        },
+        {
+            field: 'Status',
+            headerName: 'Status',
+            width: 130,
+            renderCell: () => <Button style={{ backgroundColor: '#28a745 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}>Active</Button>
+            // disableClickEventBubbling: true,
+        },
+        {
             field: 'Delete/Edit',
-            headerName: 'Delete/Edit',
+            headerName: 'Action(s)',
             width: 180,
             renderCell: renderDetailsButton,
             disableClickEventBubbling: true,
@@ -151,26 +166,15 @@ export default function States() {
                         border: '2px solid dodgerblue',
                         boxShadow: '10px 10px 3px 6px #fff4',
                         /* width: 100%; */
-                        margin: '79px 3% 2% 248px',
+                        margin: '79px 1% 2% 248px',
                         padding: '2%',
                         borderRadius: '0 15px',
                     }}
                 >
                     <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '10px 30px 10px 30px' }}>
-
-                        <Stack direction='row' spacing={3} justifyContent='space-between' >
-                            <Stack direction='row' spacing={4}>
-                                <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: '37px', border: '1px solid #F0F0F0', paddingLeft: 15 }}>
-                                    <option value="N/A">Select Country</option>
-                                    {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
-                                </select>
-
-
-                                <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
-                            </Stack>
-
-                            <Stack>
-                                <Button
+                        <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
+                        <Typography variant='h5'>State Master</Typography>
+                        <Button
                                     size="small"
                                     style={{ marginLeft: 10, }}
                                     onClick={(e) => handleAddState(e)}
@@ -179,15 +183,26 @@ export default function States() {
                                         <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
                                     </Tooltip>
                                 </Button>
+                        </Stack>
+
+                        <Stack direction='row' spacing={3} justifyContent='space-between' sx={{ mt: '20px' }}>
+                            <Stack direction='row' spacing={4}>
+                                <select id="dropdown" value={country} onChange={(e) => setCountry(e.target.value)} style={{ height: '37px', width: '200px', border: '1px solid #F0F0F0', paddingLeft: 15 }}>
+                                    <option value="N/A">Select Country</option>
+                                    {allCountries.map((item, index) => (<option value={item.id} key={index.id} >{item.name}</option>))}
+                                </select>
+
+
+                                <Button onClick={(e) => handleStateView(e)} className={classes.btn}>View State</Button>
                             </Stack>
                             {/* <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button> */}
 
                         </Stack>
                         <Grid item xs={12} >
                             <DataGrid
-                                style={{ height: 350, fontSize: 13, fontWeight: 700, marginTop: 20, marginRight: 20 }}
+                                className={classes.dataGrid}
                                 rows={allStates}
-                                rowHeight={40}
+                                rowHeight={100}
                                 columns={columns}
                                 pageSize={5}
                                 rowsPerPageOptions={[5]}
@@ -243,5 +258,17 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         borderRadius: 9,
         textTransform: 'none !important',
+    },
+    dataGrid: {
+        height: '930px', border: 'none', fontSize: 14, marginTop: 20,marginBottom: 20 ,
+        "& .MuiDataGrid-columnHeaderTitle": {
+            overflow: "clip",
+            lineHeight: "1",
+            whiteSpace: "break-spaces",
+            fontWeight: 'bold'
+          },
+          "& .MuiIconButton-sizeSmall": {
+            visibility: 'visible'
+          },
     }
 }));

@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Box, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { menu } from "./menu";
@@ -28,8 +29,8 @@ const SingleLevel = ({ item }) => {
   }
   return (
     <ListItem button onClick={handleMenuClick}>
-      <ListItemIcon style={{ color: '#ffffff', textShadow: '2px 1px 2px #000' }}>{item.icon}</ListItemIcon>
-      <ListItemText style={{ color: '#ffffff !important', textShadow: '2px 1px 2px #000 !important' }} primary={item.title} />
+      <ListItemIcon style={{ color: '#ffffff' }}>{item.icon}</ListItemIcon>
+      <ListItemText style={{  }} primary={item.title}/>
     </ListItem>
   );
 };

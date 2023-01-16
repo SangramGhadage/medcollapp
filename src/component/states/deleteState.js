@@ -25,7 +25,7 @@ const DeleteState = ({ show, data, handleclose }) => {
         axios.delete('https://api.medcollapp.com/api/states/delete/'+ id, { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
-                window.reload();
+                window.location.reload();
             }).catch((error) => {
                 console.log(error.response.data.message)
             });

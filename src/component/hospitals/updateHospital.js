@@ -14,9 +14,9 @@ export default function UpdateHospital({ show, hospital, handleclose }) {
         hospitalCity: hospital ? hospital.city : '',
         hospitalPostalCode: hospital ? hospital.postal_code : '',
         hospitalAddress: hospital ? hospital.address : '',
-        hospitalLogo: [], 
-        hospitalBannerImage: [],
-        hospitalPhotos: [],
+        hospitalLogo: '', 
+        hospitalBannerImage: '',
+        hospitalPhotos: '',
         hospitaltags: hospital ? hospital.tags : ''
     }
     const [formValues, setFormValues] = useState(initialValues);
@@ -41,9 +41,16 @@ export default function UpdateHospital({ show, hospital, handleclose }) {
         // formData.append('state_id', state);
         formData.append('address', formValues.hospitalAddress);
         formData.append('treatment', formValues.diseaseTreatment);
-        formData.append('logo', logo.files[0]);
-        formData.append('photos[]', photos.files[0]);
-        formData.append('banner_image', banner_image.files[0]);
+        if(formValues.hospitalLogo !== ''){
+            formData.append('logo', logo.files[0]);
+        }
+
+        if(formValues.hospitalPhotos !== ''){
+            formData.append('photos[]', photos.files[0]);
+        }
+        if(formValues.hospitalBannerImage !== ''){
+            formData.append('banner_image', banner_image.files[0]);
+        }
         formData.append('tags', formValues.hospitaltags);
 
         try {
@@ -56,7 +63,7 @@ export default function UpdateHospital({ show, hospital, handleclose }) {
                     },
                 }
             );
-            alert('Hospital Added')
+            alert('Hospital Updated')
             window.location.reload()
             return JSON.stringify(addcountry?.data);
         } catch (error) {

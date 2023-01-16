@@ -65,7 +65,7 @@ export default function Disease() {
             border: '2px solid dodgerblue',
             boxShadow: '10px 10px 3px 6px #fff4',
             /* width: 100%; */
-            margin: '79px 3% 2% 248px',
+            margin: '79px 1% 2% 248px',
             padding: '2%',
             borderRadius: '0 15px',
           }}
@@ -89,14 +89,16 @@ export default function Disease() {
 
               {allDiseases.map((item, index) => (
                 <Grid key={index.id} item xs={3}>
-                  <Box sx={{height: '400px', width: '100%'}}>
-                  <img src={item.icon_image} alt="" style={{ width: '100%',height: '40%', objectFit: 'cover' }} />
-                  <Typography variant='h5'>{item.name}</Typography>
-                  <Stack direction='row' justifyContent='space-around'>
-                    <Button sx={{backgroundColor: '#2C7FB2 !important',width: 100, color: '#fff !important',borderRadius: 28, textTransform: 'none !important',}} onClick={(e) => handleDeleteModal(e, item)}>Delete</Button>
+                  <Box sx={{ height: '100%', width: '100%', padding: '8px', borderRadius: '22px', boxShadow: '0px 4px 12px rgba(166, 166, 166, 0.25)', marginBottom: '10px' }}>
+                    <div style={{ width: '100%' }}>
+                      <img src={item.icon_image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '22px' }} />
+                    </div>
+                    <Typography variant='h5'>{item.name}</Typography>
+                    <Stack direction='row' justifyContent='space-around' alignItems='end'>
+                      <Button sx={{ backgroundColor: '#2C7FB2 !important', width: 100, color: '#fff !important', borderRadius: 28, textTransform: 'none !important', }} onClick={(e) => handleDeleteModal(e, item)}>Delete</Button>
 
-                    <Button sx={{backgroundColor: '#2C7FB2 !important',width: 100, color: '#fff !important',borderRadius: 28, textTransform: 'none !important',}} onClick={(e) => handleUpdateModal(e, item)}>Update</Button>
-                  </Stack>
+                      <Button sx={{ backgroundColor: '#2C7FB2 !important', width: 100, color: '#fff !important', borderRadius: 28, textTransform: 'none !important', }} onClick={(e) => handleUpdateModal(e, item)}>Update</Button>
+                    </Stack>
                   </Box>
                 </Grid>
               ))}

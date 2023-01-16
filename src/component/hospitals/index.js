@@ -92,8 +92,11 @@ export default function Hospital() {
 
               {allHospitals.map((item, index) => (
                 <Grid key={index.id} item xs={3}>
-                  <Box sx={{height: '400px', width: '100%'}}>
-                  <img src={item.logo} alt="" style={{ width: '100%',height: '40%', objectFit: 'cover' }} />
+                  <Box sx={{height: '100%', width: '100%', padding: '8px', borderRadius: '22px', boxShadow: '0px 4px 12px rgba(166, 166, 166, 0.25)', marginBottom: '10px'}}>
+                  <div style={{ width: '100%' }}>
+
+                  <img src={item.logo} alt="" style={{ width: '100%',height: '100%', objectFit: 'cover', borderRadius: '22px' }} />
+                  </div>
                   <Typography variant='h5'>{item.name}</Typography>
                   <Stack direction= 'row' spacing={2}>
                     <LocationOnIcon/>

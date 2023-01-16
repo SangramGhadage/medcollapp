@@ -66,33 +66,44 @@ export default function AddCounty({ show, handleclose }) {
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <Stack direction='row' justifyContent= 'space-between' sx={{mb: '10px'}}>
-                            <Typography style={{color: '#000'}} variant='h5'>Add Country</Typography>
-                            <CloseIcon onClick={handleclose} style={{color: '#000', cursor: 'pointer'}}/>
-                            </Stack>
-                        <Stack direction='row' gap= '20px' divider={<Divider orientation="vertical" flexItem />}>
-                            <Stack spacing={2} direction='column' gap='10px'>
-                                <TextField value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country Name" variant="outlined" size="small" onChange={handleChange} />
+                        <Stack direction='row' justifyContent='space-between' sx={{ mb: '10px' }}>
+                            <Typography style={{ color: '#000' }} variant='h5'>Add Country</Typography>
+                            <CloseIcon onClick={handleclose} style={{ color: '#000', cursor: 'pointer' }} />
+                        </Stack>
+                        <Divider/>
+                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px', mt: '20px' }}>
 
-                                <TextField value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
+                            <TextField style={{width: '545px'}} value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country Name" variant="outlined" size="small" onChange={handleChange} />
 
-                                <TextField value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
+                            <TextField style={{width: '300px'}}  value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
+                        </Stack>
 
-                                <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
+                        <Stack direction='row' spacing={2} gap='10px' sx={{ mb: '20px' }}>
 
-                                <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="currency Code" variant="outlined" size="small" onChange={handleChange} />
-                            </Stack>
-                            <Stack spacing={2} direction='column' gap='10px'>
-                                <TextField value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
+                            <TextField value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
 
-                                <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} inputProps={{accept: 'image/*'}} />
+                            <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
 
-                                <TextField  value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} inputProps={{accept: 'image/*'}} />
+                            <TextField value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="currency Code" variant="outlined" size="small" onChange={handleChange} />
 
-                                <TextField value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} inputProps={{accept: 'image/*'}} />
+                            <TextField value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
+                        </Stack>
 
-                                <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
-                            </Stack>
+                        <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
+                            <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} inputProps={{ accept: 'image/*' }} />
+
+                        </Stack>
+                        <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
+                            <TextField value={formValues.bannerImage} name="bannerImage" className={classes.textField} id="bannerImage" type='file' label="Banner image" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} inputProps={{ accept: 'image/*' }} />
+
+                        </Stack>
+                        <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
+                            <TextField value={formValues.photos} name="photos" className={classes.textField} id="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} InputLabelProps={{ shrink: true }} inputProps={{ accept: 'image/*' }} />
+
+                        </Stack>
+                        <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
+                            <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
+
                         </Stack>
                         <Grid container>
                             <Grid item xs={12} sm={6}>
@@ -134,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none !important',
     },
     textField: {
-        width: '400px',
+        // width: '400px',
     }
 
 }));

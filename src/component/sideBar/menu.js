@@ -7,20 +7,19 @@ import ArticleIcon from '@mui/icons-material/Article';
 import  ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import React from "react";
-import { useNavigate } from 'react-router-dom';
 
-
-// const navigate = useNavigate();
 export const menu = [
   {
-    icon: <DashboardIcon style={{textShadow: '2px 1px 2px black !important'}}/>,
+    icon: <DashboardIcon style={{textShadowOffset:{width:5, height:2},
+    shadowColor:'#000000',
+    shadowOpacity:0.7}}/>,
     title: "Dashboard",
     items: [],
     path: '/Dashboard'
   },
   {
     icon: <AddchartIcon/>,
-    title: "Masters",
+    title: 'Masters',
     items: [
       {
         title: "- Diseases",
