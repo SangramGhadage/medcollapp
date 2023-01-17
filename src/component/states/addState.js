@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Button, Slide, TextField, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
+import { Button, Typography, Slide, TextField, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import { Stack } from '@mui/material';
 
@@ -73,32 +74,40 @@ export default function AddState({ show, data, handleclose }) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                 <DialogTitle id="alert-dialog-title" style={{ fontWeight: 700, fontSize: 20, color: '#000' }}>{"Add State"}
-                    <IconButton edge="start" color="inherit" onClick={handleclose} aria-label="close" style={{ float: 'right', color: '#000', }}>
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <Stack direction='row' gap= '20px'>
-                        <Stack spacing={2} direction='column' >
+                        <Stack direction='row' justifyContent='space-between' sx={{ mb: '10px' }}>
+                            <Typography style={{ color: '#000' }} variant='h5'>Add State</Typography>
+                            <CloseIcon onClick={handleclose} style={{ color: '#000', cursor: 'pointer' }} />
+                        </Stack>
+                        <Divider />
+                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px', mt: '20px' }} >
                             <TextField value={formValues.stateName} name="stateName" className={classes.textField} id="outlined-basic" type='text' label="State Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.StateShortName} name="StateShortName" className={classes.textField} id="outlined-basic" type='text' label="State Short Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="languageCode" variant="outlined" size="small" onChange={handleChange} />
 
-                            <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
                         </Stack>
-                        <Stack spacing={2} direction='column' sx={{mt: '10px'}}>
+
+                        <Stack spacing={2} direction='column' sx={{ mt: '20px' }}>
 
                             <TextField id="vectorIcon" className={classes.textField} value={formValues.vectorIcone} name="vectorIcone" type='file' label="Vactor icon" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
 
+                        </Stack>
+                        <Stack spacing={2} direction='column' sx={{ mt: '20px' }}>
+
                             <TextField id="bannerImage" className={classes.textField} value={formValues.bannerImage} name="bannerImage" type='file' label="Banner Image" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
+
+                        </Stack>
+                        <Stack spacing={2} direction='column' sx={{ mt: '20px' }}>
 
                             <TextField id="photos" className={classes.textField} value={formValues.photos} name="photos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} accept="image/*" InputLabelProps={{ shrink: true }} />
 
                         </Stack>
+                        <Stack spacing={2} direction='column' sx={{ mt: '20px' }}>
+
+                            <TextField value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
                         </Stack>
                         <Grid container>
                             <Grid item xs={12} sm={6}>
@@ -143,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '12px'
     },
     textField: {
-        width: '300px'
+        // width: '300px'
     }
 
 }));

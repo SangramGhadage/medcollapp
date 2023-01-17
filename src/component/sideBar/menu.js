@@ -10,9 +10,7 @@ import React from "react";
 
 export const menu = [
   {
-    icon: <DashboardIcon style={{textShadowOffset:{width:5, height:2},
-    shadowColor:'#000000',
-    shadowOpacity:0.7}}/>,
+    icon: <DashboardIcon/>,
     title: "Dashboard",
     items: [],
     path: '/Dashboard'

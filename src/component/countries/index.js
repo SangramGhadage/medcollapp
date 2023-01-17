@@ -181,6 +181,13 @@ export default function Country() {
                                 rowsPerPageOptions={[5]}
                                 columnWidth={5}
                                 headerHeight={100}
+                                
+                                componentsProps={{
+                                    toolbar: {
+                                        showQuickFilter: true,
+                                           quickFilterProps: { debounceMs: 500 },
+                                     },
+                                    }}
                                 onRowClick={(newSelection) => {
                                     handleCellClick(newSelection.row);
                                 }}
