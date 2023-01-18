@@ -1,7 +1,9 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Stack, TextField } from '@mui/material';
+import CloseIcon from '@material-ui/icons/Close';
+import Divider from '@mui/material/Divider';
 import axios from 'axios';
 
 
@@ -53,7 +55,7 @@ export default function AddDisease({ show, handleclose, data }) {
     };
 
     useEffect(() => {
-        
+
     }, [])
     console.log(country)
     return (
@@ -63,34 +65,43 @@ export default function AddDisease({ show, handleclose, data }) {
                 maxWidth={maxWidth}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                className={classes.root}
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'diseaseName'value= {formValues.diseaseName} onChange={handleChange}  className={classes.textField} id="outlined-basic" type='text' label="Disease Name" variant="outlined" size="small" />
-
-                            <TextField sx={{ width: '400px' }} name= 'diseaseCatagory'value= {formValues.diseaseCatagory} onChange={handleChange}  id="outlined-basic" type='text' label="Catagory" variant="outlined" size="small" />
+                        <Stack direction='row' justifyContent='space-between' sx={{ mb: '10px' }}>
+                            <Typography style={{ color: '#000' }} variant='h5'>Add Disease</Typography>
+                            <CloseIcon onClick={handleclose} style={{ color: '#000', cursor: 'pointer' }} />
                         </Stack>
-                        <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'diseaseCause'value= {formValues.diseaseCause} onChange={handleChange}  className={classes.textField} id="outlined-basic" type='text' label="Cause" variant="outlined" size="small" />
+                        <Divider />
+                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px', mt: '20px' }}>
+                            <TextField name='diseaseName' value={formValues.diseaseName} onChange={handleChange} className={classes.textField} id="outlined-basic" type='text' label="Disease Name" variant="outlined" size="small" />
 
-                            <TextField sx={{ width: '400px' }} name= 'diseaseResult'value= {formValues.diseaseResult} onChange={handleChange}   id="outlined-basic" type='text' label="Result" variant="outlined" size="small" />
-                        </Stack>
-                        <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'diseaseTreatment'value= {formValues.diseaseTreatment} onChange={handleChange}  className={classes.textField} id="outlined-basic" type='text' label="Treatment" variant="outlined" size="small" />
+                            <TextField name='diseaseCatagory' value={formValues.diseaseCatagory} onChange={handleChange} id="outlined-basic" type='text' label="Catagory" variant="outlined" size="small" />
 
-                            <TextField sx={{ width: '400px' }} name= 'diseaseDiscription'value= {formValues.diseaseDiscription} onChange={handleChange}  id="outlined-basic" type='text' label="Disease Discription" variant="outlined" size="small" />
-                        </Stack>
-                        <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
-                            <TextField sx={{ width: '400px' }} name= 'iconImage'value= {formValues.iconImage} onChange={handleChange}  className={classes.textField}id="icon_image" type='file' label="Icon Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
+                            <TextField name='diseaseCause' value={formValues.diseaseCause} onChange={handleChange} className={classes.textField} id="outlined-basic" type='text' label="Cause" variant="outlined" size="small" />
 
-                            <TextField  sx={{ width: '400px' }} name= 'slideImage'value= {formValues.slideImage} onChange={handleChange} id="slide_images" type='file' label="Slide Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
                         </Stack>
-                        <Stack direction='row' gap='4px' sx={{ mb: '7px' }}>
+                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px' }}>
 
-                            <TextField sx={{ width: '400px' }} name= 'tags'value= {formValues.tags} onChange={handleChange} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" />
+                            <TextField name='diseaseResult' value={formValues.diseaseResult} onChange={handleChange} id="outlined-basic" type='text' label="Result" variant="outlined" size="small" />
+
+                            <TextField name='diseaseTreatment' value={formValues.diseaseTreatment} onChange={handleChange} className={classes.textField} id="outlined-basic" type='text' label="Treatment" variant="outlined" size="small" />
+
+                            <TextField name='diseaseDiscription' value={formValues.diseaseDiscription} onChange={handleChange} id="outlined-basic" type='text' label="Disease Discription" variant="outlined" size="small" />
                         </Stack>
-                        <Typography>{country}</Typography>
+                        <Stack direction='column' gap='4px' sx={{ mb: '20px' }}>
+                            <TextField name='iconImage' value={formValues.iconImage} onChange={handleChange} className={classes.textField} id="icon_image" type='file' label="Icon Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
+
+                        </Stack>
+                        <Stack direction='column' gap='4px' sx={{ mb: '20px' }}>
+
+                            <TextField name='slideImage' value={formValues.slideImage} onChange={handleChange} id="slide_images" type='file' label="Slide Image" variant="outlined" size="small" InputLabelProps={{ shrink: true }} />
+                        </Stack>
+                        <Stack direction='column' gap='4px' sx={{ mb: '20px' }}>
+
+                            <TextField name='tags' value={formValues.tags} onChange={handleChange} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" />
+                        </Stack>
                         <Grid container>
                             <Grid item xs={12} sm={6}>
                                 <Button className={classes.btn} onClick={handleclose} style={{ float: 'right', marginRight: 20 }}>
@@ -115,9 +126,10 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
 
     root: {
-        display: 'flex',
-        flexGrow: 1,
-        backgroundColor: 'white',
+        "& .MuiDialog-scrollPaper": {
+            alignItems: 'start !important',
+            justifyContent: 'end !important'
+        }
     },
     btn: {
         backgroundColor: '#2C7FB2 !important',

@@ -63,6 +63,7 @@ export default function AddCounty({ show, handleclose }) {
                 maxWidth={maxWidth}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                className= {classes.root}
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -129,9 +130,10 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
 
     root: {
-        display: 'flex',
-        flexGrow: 1,
-        backgroundColor: 'white',
+        "& .MuiDialog-scrollPaper": {
+            alignItems: 'start !important',
+            justifyContent: 'end !important'
+        }
     },
     btn: {
         backgroundColor: '#2C7FB2 !important',
