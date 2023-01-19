@@ -6,6 +6,11 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ArticleIcon from '@mui/icons-material/Article';
 import  ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import AddchartIcon from '@mui/icons-material/Addchart';
+import FlagIcon from '@mui/icons-material/Flag';
+import PublicIcon from '@mui/icons-material/Public';
+import CoronavirusIcon from '@mui/icons-material/Coronavirus';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import AttractionsIcon from '@mui/icons-material/Attractions';
 import React from "react";
 
 export const menu = [
@@ -20,29 +25,36 @@ export const menu = [
     title: 'Masters',
     items: [
       {
-        title: "- Diseases",
-        items: [ ],
-        path: '/Disease'
-      },
-      {
-        title: "- Hospitals",
-        items: [],
-        path: '/Hospital'      
-      },
-      {
-        title: "- Countries",
+
+        icon: <FlagIcon/>,
+        title: "Countries",
         items: [],
         path: '/Country'      
       },
       {
-        title: "- States",
+        icon: <PublicIcon/>,
+        title: "States",
         items: [],
         path: '/States'      
       },
       {
-        title: "- Tourism Attraction",
+        icon: <CoronavirusIcon/>,
+        title: "Diseases",
+        items: [ ],
+        path: '/Disease'
+      },
+      {
+        icon: <LocalHospitalIcon/>,
+        title: "Hospitals",
         items: [],
-        path: '/Dashboard'      },
+        path: '/Hospital'      
+      },
+      {
+        icon: <AttractionsIcon/>,
+        title: "Tourism Attraction",
+        items: [],
+        path: '/Dashboard'      
+      },
     ]
   },
   {

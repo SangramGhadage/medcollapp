@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
 import { Box, Stack } from '@mui/material';
 import axios from "axios";
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
@@ -198,7 +198,7 @@ export default function States() {
                             {/* <Button onClick={(e) => handleAddState(e)} className={classes.btn}>Add State</Button> */}
 
                         </Stack>
-                        <Grid item xs={12} >
+                        <Grid item xs={12} style={{ height: '950px' }}>
                             <DataGrid
                                 className={classes.dataGrid}
                                 rows={allStates}
@@ -207,6 +207,18 @@ export default function States() {
                                 pageSize={5}
                                 rowsPerPageOptions={[5]}
                                 columnWidth={5}
+                                disableColumnFilter
+                                disableColumnSelector
+                                disableDensitySelector
+                                components={{ Toolbar: GridToolbar }}
+                                componentsProps={{
+                                    toolbar: {
+                                        csvOptions: { disableToolbarButton: 'true' },
+                                        printOptions: { disableToolbarButton: 'true' },
+                                        showQuickFilter: true,
+                                        quickFilterProps: { debounceMs: 500 },
+                                    },
+                                }}
                                 onRowClick={(newSelection) => {
                                     handleCellClick(newSelection.row);
                                 }}
@@ -267,8 +279,8 @@ const useStyles = makeStyles((theme) => ({
             whiteSpace: "break-spaces",
             fontWeight: 'bold'
           },
-          "& .MuiIconButton-sizeSmall": {
-            visibility: 'visible'
-          },
+          "& .css-1e2bxag-MuiDataGrid-root": {
+            border: 'none !important'
+        }
     }
 }));

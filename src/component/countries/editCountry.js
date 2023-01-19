@@ -134,7 +134,7 @@ const EditCountry = ({ show, data, handleclose }) => {
                         </Stack>
                         <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
 
-                            <TextField style={{}} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
+                            <TextField style={{}} value={formValues.tags} name="tags" className={classes.textField} id="outlined-basic" type='text' label="tags" variant="outlined" size="small" onChange={handleChange} />
 
                         </Stack>
 

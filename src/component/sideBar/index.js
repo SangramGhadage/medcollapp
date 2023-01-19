@@ -53,7 +53,7 @@ const MultiLevel = ({ item }) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {children.map((child, key) => (
-            <MenuItem key={key} item={child} />
+            <MenuItem key={key} item={child}/>
           ))}
         </List>
       </Collapse>

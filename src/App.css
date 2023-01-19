@@ -7,9 +7,6 @@ body{
   background-size: cover;
   font-family: "Poppins", Helvetica, sans-serif;
 }
-/* .MuiTypography-body1 {
-  text-shadow: 2px 1px 2px black;
-} */
 .MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
   color: #212529;
   font-size: 14px;
@@ -20,8 +17,11 @@ body{
     text-shadow: 2px 1px 2px #000;
 }
 .MuiListItemIcon-root {
-  min-width: 42px !important;
+  min-width: 30px !important;
 }
 .MuiOutlinedInput-root {
   background-color: #edfafe;
+}
+.MuiCollapse-wrapperInner {
+  padding-left: 35px
 }

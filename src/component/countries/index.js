@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Typography, TextField, Button,  Tooltip } from "@material-ui/core";
+import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core";
 import { Box, Stack, } from '@mui/material';
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -38,10 +38,10 @@ export default function Country() {
     const renderDetailsButton = (params) => {
         return (
             <>
-               {/* #28a745 */}
+                {/* #28a745 */}
                 <Button
                     size="small"
-                    
+
                     style={{ backgroundColor: '#ffc107 ', textTransform: 'none', color: '#fff', marginRight: '5px', fontWeight: '700' }}
                     onClick={() => {
                         setOpenEditmodal(true)
@@ -51,7 +51,7 @@ export default function Country() {
                 </Button>
                 <Button
                     size="small"
-                    style={{ backgroundColor: '#dc3545 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}
+                    style={{ backgroundColor: '#dc3545 ', textTransform: 'none', color: '#fff', fontWeight: '700' }}
                     onClick={() => {
                         setOpenDeletemodal(true)
                     }}
@@ -95,7 +95,7 @@ export default function Country() {
             field: 'Status',
             headerName: 'Status',
             width: 130,
-            renderCell: () => <Button style={{ backgroundColor: '#28a745 ', textTransform: 'none', color: '#fff',fontWeight: '700' }}>Active</Button>
+            renderCell: () => <Button style={{ backgroundColor: '#28a745 ', textTransform: 'none', color: '#fff', fontWeight: '700' }}>Active</Button>
             // disableClickEventBubbling: true,
         },
         {
@@ -156,7 +156,7 @@ export default function Country() {
                     }}
                 >
                     <Box sx={{ width: '100%', backgroundColor: '#fff3', boxShadow: '0px 0px 15px 0px rgb(0 0 0 / 10%)', borderRadius: '5px', padding: '0 30px 10px 30px' }}>
-                       
+
                         <Stack direction='row' justifyContent='space-between' sx={{ width: '100%', mt: '20px' }}>
                             <Typography variant='h5'>Country Master</Typography>
                             <Button
@@ -171,9 +171,9 @@ export default function Country() {
                                 </Tooltip>
                             </Button>
                         </Stack>
-                        <Grid item xs={12} >
+                        <Grid item xs={12} style={{ height: '950px' }}>
                             <DataGrid
-                            className={classes.dataGrid}
+                                className={classes.dataGrid}
                                 rows={allCountries}
                                 rowHeight={150}
                                 columns={columns}
@@ -181,13 +181,18 @@ export default function Country() {
                                 rowsPerPageOptions={[5]}
                                 columnWidth={5}
                                 headerHeight={100}
-                                
+                                disableColumnFilter
+                                disableColumnSelector
+                                disableDensitySelector
+                                components={{ Toolbar: GridToolbar }}
                                 componentsProps={{
                                     toolbar: {
+                                        csvOptions: { disableToolbarButton: 'true' },
+                                        printOptions: { disableToolbarButton: 'true' },
                                         showQuickFilter: true,
-                                           quickFilterProps: { debounceMs: 500 },
-                                     },
-                                    }}
+                                        quickFilterProps: { debounceMs: 500 },
+                                    },
+                                }}
                                 onRowClick={(newSelection) => {
                                     handleCellClick(newSelection.row);
                                 }}
@@ -231,15 +236,18 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none !important',
     },
     dataGrid: {
-        height: '930px', border: 'none', fontSize: 14, marginTop: 20,marginBottom: 20 ,
+        height: '930px', border: 'none', fontSize: 14, marginTop: 20, marginBottom: 20,
         "& .MuiDataGrid-columnHeaderTitle": {
             overflow: "clip",
             lineHeight: "1",
             whiteSpace: "break-spaces",
             fontWeight: 'bold'
-          },
-          "& .MuiIconButton-sizeSmall": {
-            visibility: 'visible'
-          },
+        },
+        "& .css-1e2bxag-MuiDataGrid-root": {
+            border: 'none !important'
+        }
+        // "& .MuiIconButton-sizeSmall": {
+        //     visibility: 'visible'
+        // },
     }
 }));

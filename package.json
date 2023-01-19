@@ -10,6 +10,8 @@
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
     "@mui/icons-material": "^5.10.9",
+    "@mui/x-data-grid": "^5.0.0",
+    "@mui/x-data-grid-pro": "^5.0.0",
     "@mui/material": "^5.10.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -84,7 +84,7 @@ export default function EditState({ show, data, handleclose }) {
                             <CloseIcon onClick={handleclose} style={{ color: '#000', cursor: 'pointer' }} />
                         </Stack>
                         <Divider />
-                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px' }} >
+                        <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px', mt: '20px' }} >
                             <TextField value={formValues.stateName} name="stateName" className={classes.textField} id="outlined-basic" type='text' label="State Name" variant="outlined" size="small" onChange={handleChange} />
 
                             <TextField value={formValues.StateShortName} name="StateShortName" className={classes.textField} id="outlined-basic" type='text' label="State Short Name" variant="outlined" size="small" onChange={handleChange} />

@@ -168,19 +168,19 @@ export default function UpdateHospital({ show, hospital, handleclose }) {
 
                         <Stack direction='column' spacing={3} gap='10px' sx={{ mb: '20px' }}>
 
-                        <img style={{ width: '300px' }} src={hospital.photos} />
+                            <img style={{ width: '300px' }} src={hospital.photos} />
                             <TextField id="uhospitalPhotos" className={classes.textField} value={formValues.hospitalPhotos} name="hospitalPhotos" type='file' label="Photos" variant="outlined" size="small" onChange={handleChange} inputProps={{ accept: 'image/*' }} InputLabelProps={{ shrink: true }} />
 
                         </Stack>
                         <Stack direction='column' spacing={3} gap='10px' sx={{ mb: '20px' }}>
 
-                        <img style={{ width: '300px' }} src={hospital.logo} />
+                            <img style={{ width: '300px' }} src={hospital.logo} />
                             <TextField id="uhospitalLogo" className={classes.textField} value={formValues.hospitalLogo} name="hospitalLogo" type='file' label="Logo" variant="outlined" size="small" onChange={handleChange} inputProps={{ accept: 'image/*' }} InputLabelProps={{ shrink: true }} />
 
                         </Stack>
                         <Stack direction='column' spacing={3} gap='10px' sx={{ mb: '20px' }}>
 
-                        <img style={{ width: '300px' }} src={hospital.banner_image} />
+                            <img style={{ width: '300px' }} src={hospital.banner_image} />
                             <TextField id="uhospitalBannerImage" className={classes.textField} value={formValues.hospitalBannerImage} name="hospitalBannerImage" type='file' label="Banner Image" variant="outlined" size="small" onChange={handleChange} inputProps={{ accept: 'image/*' }} InputLabelProps={{ shrink: true }} />
 
                         </Stack>
