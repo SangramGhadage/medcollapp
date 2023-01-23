@@ -11,6 +11,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
 import Navbar from '../sideBar/main'
+import Loader from '../Loader';
 import EditCountry from './editCountry'
 import DeleteCountry from './deleteCountry';
 import AddCounty from './addCounty';

@@ -8,6 +8,7 @@ import axios from 'axios';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+import Loader from '../Loader';
 import DeleteHospital from './deleteHospital';
 import AddHospital from './addHospital';
 import UpdateHospital from './updateHospital';
@@ -88,6 +89,8 @@ export default function Hospital() {
                 </Tooltip>
               </Button>
             </Stack>
+            {allHospitals.length? 
+
             <Grid container direction='row' spacing={3}>
 
               {allHospitals.map((item, index) => (
@@ -111,6 +114,7 @@ export default function Hospital() {
                 </Grid>
               ))}
             </Grid>
+            : <Loader/>}
           </Box>
 
           {openAddHospitalmodal ? <AddHospital show={openAddHospitalmodal} handleclose={() => SetOpenAddHospitalmodal(false)} /> : null}

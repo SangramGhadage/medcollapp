@@ -7,6 +7,7 @@ import axios from 'axios';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
 import Navbar from '../sideBar/main'
+import Loader from '../Loader';
 import AddDisease from './addDisease';
 import DeleteDisease from './deleteDisease';
 import UpdateDisease from './updateDisease';
@@ -17,6 +18,7 @@ export default function Disease() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [allDiseases, setAllDiseases] = useState([]);
   const [openAddDiseasemodal, SetOpenAddDiseasemodal] = useState(false);
   const [openDeleteDiseasemodal, SetOpenDeleteDiseasemodal] = useState(false);
@@ -85,8 +87,10 @@ export default function Disease() {
                 </Tooltip>
               </Button>
             </Stack>
-            <Grid container direction='row' spacing={3}>
+            {allDiseases.length? 
 
+            <Grid container direction='row' spacing={3}>
+                
               {allDiseases.map((item, index) => (
                 <Grid key={index.id} item xs={3}>
                   <Box sx={{ height: '100%', width: '100%', padding: '8px', borderRadius: '22px', boxShadow: '0px 4px 12px rgba(166, 166, 166, 0.25)', marginBottom: '10px' }}>
@@ -103,6 +107,7 @@ export default function Disease() {
                 </Grid>
               ))}
             </Grid>
+            : <Loader/>}
           </Box>
 
           {openAddDiseasemodal ? <AddDisease show={openAddDiseasemodal} handleclose={() => SetOpenAddDiseasemodal(false)} /> : null}
