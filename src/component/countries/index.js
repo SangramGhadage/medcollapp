@@ -6,9 +6,8 @@ import { Grid, Typography, TextField, Button, Tooltip } from "@material-ui/core"
 import { Box, Stack, } from '@mui/material';
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from 'axios';
-import DeleteIcon from '@mui/icons-material/Delete';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import AddIcon from '@mui/icons-material/Add';
 
 import Navbar from '../sideBar/main'
 import Loader from '../Loader';
@@ -27,15 +26,9 @@ export default function Country() {
     const [openDeletemodal, setOpenDeletemodal] = React.useState(false);
     const [openAddCountrymodal, setOpenAddCountrymodal] = React.useState(false);
     const [country, setCountry] = useState('');
+    const [records, setrecords] = useState('5');
 
     const navigate = useNavigate();
-    const initialValues = { countryName: "", countryCode: "", languageCode: "", currencyCode: "", currencySymbol: "", vectorIcone: [], photos: [], bannerImage: [], tags: "", currencyName: "" }
-    const [formValues, setFormValues] = useState(initialValues);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    }
     const renderDetailsButton = (params) => {
         return (
             <>
@@ -168,9 +161,22 @@ export default function Country() {
                                 }}
                             >
                                 <Tooltip title="Add New Country" placement="top-start">
-                                    <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                                    <AddIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda', padding: '7px' }} />
                                 </Tooltip>
                             </Button>
+                        </Stack>
+                        <Stack direction='row' spacing={1} alignItems= 'center' sx={{position: 'relative', top: '61px', zIndex: 1000, width: '200px'}}>
+                            <Typography style={{color: '#777777', fontSize: '14px'}} variant='h6'>Show</Typography>
+
+                            <select id="dropdown" value={records} onChange={(e) => setrecords(e.target.value)} style={{ width: 67, height: 37, border: '1px solid #F0F0F0', fontSize: '20px', padding: '3px', borderRadius: '5px', cursor: 'pointer'  }}>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+
+                            </select>
+                            <Typography style={{color: '#777777', fontSize: '14px'}} variant='h6'>entries</Typography>
                         </Stack>
                         <Grid item xs={12} style={{ height: '950px' }}>
                             <DataGrid
@@ -178,7 +184,7 @@ export default function Country() {
                                 rows={allCountries}
                                 rowHeight={150}
                                 columns={columns}
-                                pageSize={5}
+                                pageSize={records}
                                 rowsPerPageOptions={[5]}
                                 columnWidth={5}
                                 headerHeight={100}
@@ -244,11 +250,5 @@ const useStyles = makeStyles((theme) => ({
             whiteSpace: "break-spaces",
             fontWeight: 'bold'
         },
-        "& .css-1e2bxag-MuiDataGrid-root": {
-            border: 'none !important'
-        }
-        // "& .MuiIconButton-sizeSmall": {
-        //     visibility: 'visible'
-        // },
     }
 }));

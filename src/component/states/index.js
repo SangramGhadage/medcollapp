@@ -8,6 +8,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import AddIcon from '@mui/icons-material/Add';
 
 import DeleteState from './deleteState';
 import EditState from './editState'
@@ -180,7 +181,7 @@ export default function States() {
                                     onClick={(e) => handleAddState(e)}
                                 >
                                     <Tooltip title="Add New State" placement="top-start">
-                                        <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                                        <AddIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda', padding: '7px' }} />
                                     </Tooltip>
                                 </Button>
                         </Stack>

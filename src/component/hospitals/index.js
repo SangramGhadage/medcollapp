@@ -6,6 +6,7 @@ import { Grid, Tooltip } from "@material-ui/core";
 import { Box, Stack, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import AddIcon from '@mui/icons-material/Add';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import Loader from '../Loader';
@@ -85,7 +86,7 @@ export default function Hospital() {
               }}
               >
                 <Tooltip title="Add New Hospital" placement="top-start">
-                  <ControlPointOutlinedIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda' }} />
+                  <AddIcon style={{ color: '#fff', borderRadius: '50%', fontSize: '2rem', backgroundColor: '#004dda', padding: '7px' }} />
                 </Tooltip>
               </Button>
             </Stack>
