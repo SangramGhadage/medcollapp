@@ -89,7 +89,7 @@ const EditCountry = ({ show, data, handleclose }) => {
                 maxWidth={maxWidth}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                className= {classes.root}
+                className={classes.root}
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -99,19 +99,36 @@ const EditCountry = ({ show, data, handleclose }) => {
                         </Stack>
                         <Divider />
                         <Stack direction='row' spacing={3} gap='10px' sx={{ mb: '20px', mt: '20px' }}>
-                            <TextField style={{ width: '545px' }} value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' label="Country Name" variant="outlined" size="small" onChange={handleChange} />
 
-                            <TextField style={{ width: '300px' }} value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' label="Country Code" variant="outlined" size="small" onChange={handleChange} />
+                            <div>
+                                <label htmlFor='countryName' style={{ color: '#333' }}>Country Name</label>
+                                <TextField style={{ width: '545px' }} value={formValues.countryName} name="countryName" className={classes.textField} id="outlined-basic" type='text' placeholder="Country Name" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
+                            <div>
+                                <label htmlFor='countrycode' style={{ color: '#333' }}>Country Code</label>
+                                <TextField style={{ width: '300px' }} value={formValues.countryCode} name="countryCode" className={classes.textField} id="outlined-basic" type='text' placeholder='Country Code' variant="outlined" size="small" onChange={handleChange} />
+                            </div>
                         </Stack>
                         <Stack direction='row' spacing={2} gap='10px' sx={{ mb: '20px' }}>
+                            <div>
+                                <label htmlFor='currencyName' style={{ color: '#333' }}>Currency name</label>
+                                <TextField style={{ width: '200px' }} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' placeholder="Currency name" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
 
-                            <TextField style={{ width: '200px' }} value={formValues.currencyName} name="currencyName" className={classes.textField} id="outlined-basic" type='text' label="Currency name" variant="outlined" size="small" onChange={handleChange} />
+                            <div>
+                                <label htmlFor='languageCode' style={{ color: '#333' }}>Language Code</label>
+                                <TextField style={{ width: '200px' }} value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' placeholder="Language Code" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
 
-                            <TextField style={{ width: '200px' }} value={formValues.languageCode} name="languageCode" className={classes.textField} id="outlined-basic" type='text' label="Language Code" variant="outlined" size="small" onChange={handleChange} />
+                            <div>
+                                <label htmlFor='currencyCode' style={{ color: '#333' }}>Currency Code</label>
+                                <TextField style={{ width: '200px' }} value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' placeholder="currency Code" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
 
-                            <TextField style={{ width: '200px' }} value={formValues.currencyCode} name="currencyCode" className={classes.textField} id="outlined-basic" type='text' label="currency Code" variant="outlined" size="small" onChange={handleChange} />
-
-                            <TextField style={{ width: '200px' }} value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' label="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
+                            <div>
+                                <label htmlFor='currencySymbol' style={{ color: '#333' }}>Currency Symbol</label>
+                                <TextField style={{ width: '200px' }} value={formValues.currencySymbol} name="currencySymbol" className={classes.textField} id="outlined-basic" type='text' placeholder="Currency Symbol" variant="outlined" size="small" onChange={handleChange} />
+                            </div>
                         </Stack>
 
                         <Stack direction='column' spacing={2} gap='10px' width='100%' sx={{ mb: '20px' }}>
